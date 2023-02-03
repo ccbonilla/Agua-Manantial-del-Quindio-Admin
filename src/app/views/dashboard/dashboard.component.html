@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto px-2 pt-3">
+      <div id="sidebar" class="collapse collapse-horizontal show border-end">
+        <div
+          id="sidebar-nav"
+          class="list-group border-0 rounded-0 text-sm-start min-vh-100"
+        >
+          <h6 class="list-group-item border-end-0">Bienvenido</h6>
+          <a
+            href="#"
+            class="list-group-item border-end-0 d-inline-block text-truncate"
+            data-bs-parent="#sidebar"
+            [routerLink]="['/orders']"
+            ><i class="bi bi-truck"></i> <span class="px-2">Pedidos</span>
+          </a>
+          <a
+            href="#"
+            class="list-group-item border-end-0 d-inline-block text-truncate"
+            data-bs-parent="#sidebar"
+            ><i class="bi bi-water"></i> <span class="px-2">Productos</span></a
+          >
+          <a
+            href="#"
+            class="list-group-item border-end-0 d-inline-block text-truncate"
+            data-bs-parent="#sidebar"
+            ><i class="bi bi-people"></i> <span class="px-2">Clientes</span></a
+          >
+          <a
+            href="#"
+            class="list-group-item border-end-0 d-inline-block text-truncate"
+            data-bs-parent="#sidebar"
+            ><i class="bi bi-clipboard-data"></i>
+            <span class="px-2">Reportes</span></a
+          >
+          <a
+            href="#"
+            class="list-group-item border-end-0 d-inline-block text-truncate"
+            data-bs-parent="#sidebar"
+            ><i class="bi bi-newspaper"></i>
+            <span class="px-2">Actualizar datos</span></a
+          >
+          <br /><br /><br />
+          <a
+            href="#"
+            class="list-group-item border-end-0 d-inline-block text-truncate"
+            data-bs-parent="#sidebar"
+            ><i class="bi bi-unlock"></i>
+            <span class="px-2" (click)="logOut()">Cerrar sesión</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

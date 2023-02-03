@@ -1,0 +1,104 @@
+<div>
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col-auto px-3 pt-2">
+        <div id="sidebar" class="collapse collapse-horizontal show border-end">
+          <div
+            id="sidebar-nav"
+            class="list-group border-0 rounded-0 text-sm-start min-vh-100"
+          >
+            <h6 class="list-group-item border-end-0">Bienvenido</h6>
+            <a
+              href="#"
+              class="list-group-item border-end-0 d-inline-block text-truncate"
+              data-bs-parent="#sidebar"
+              [routerLink]="['/orders']"
+              ><i class="bi bi-truck"></i> <span class="px-2">Pedidos</span>
+            </a>
+            <a
+              href="#"
+              class="list-group-item border-end-0 d-inline-block text-truncate"
+              data-bs-parent="#sidebar"
+              ><i class="bi bi-water"></i>
+              <span class="px-2">Productos</span></a
+            >
+            <a
+              href="#"
+              class="list-group-item border-end-0 d-inline-block text-truncate"
+              data-bs-parent="#sidebar"
+              ><i class="bi bi-people"></i>
+              <span class="px-2">Clientes</span></a
+            >
+            <a
+              href="#"
+              class="list-group-item border-end-0 d-inline-block text-truncate"
+              data-bs-parent="#sidebar"
+              ><i class="bi bi-clipboard-data"></i>
+              <span class="px-2">Reportes</span></a
+            >
+            <a
+              href="#"
+              class="list-group-item border-end-0 d-inline-block text-truncate"
+              data-bs-parent="#sidebar"
+              ><i class="bi bi-newspaper"></i>
+              <span class="px-2">Actualizar datos</span></a
+            >
+            <br /><br /><br />
+            <a
+              href="#"
+              class="list-group-item border-end-0 d-inline-block text-truncate"
+              data-bs-parent="#sidebar"
+              ><i class="bi bi-unlock"></i>
+              <span class="px-2" (click)="logOut()">Cerrar sesión</span></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th *ngFor="let title of titles">{{ title }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>
+          {{ order.order_id }}
+        </td>
+        <td>
+          {{ order.order_date }}
+        </td>
+        <td>
+          {{ order.user }}
+        </td>
+        <td>
+          {{ order.address }}
+        </td>
+        <td>
+          {{ order.quantity }}
+        </td>
+        <td>
+          {{ order.value }}
+        </td>
+        <td>
+          <a><i class="bi bi-eye-fill"></i></a>
+        </td>
+        <td>
+          <a><i class="bi bi-trash"></i></a>
+        </td>
+        <td>
+          <a><i class="bi bi-pencil"></i></a>
+        </td>
+        <td>
+          <a><i class="bi bi-bicycle"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="float">Crear Pedido</button>
+</div>
