@@ -1,29 +1,11 @@
-<!-- <div class="container">
-  <div class="abs-center">
-    <form action="#" class="border p-3 form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          class="form-control"
-        />
-      </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-  </div>
-</div> -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <img class="logo" src="/assets/logo_manantial.png" />
+</nav>
 <div class="container">
   <div class="abs-center">
     <form action="#" class="border p-5 form">
       <div class="form-group">
-        <!-- <label for="email">Email</label> -->
-        <h5 class="justify-content-center">Inicio de sesión</h5>
+        <h1 class="justify-content-center">Inicio de sesión</h1>
         <input
           type="email"
           name="email"
@@ -33,7 +15,6 @@
         />
       </div>
       <div class="form-group">
-        <!-- <label for="password">Password</label> -->
         <input
           type="password"
           name="password"
@@ -43,7 +24,7 @@
         />
       </div>
       <div>
-        <button class="btn btn-primary my-3" (click)="login()">
+        <button class="btn btn-primary my-3" (click)="logIn()">
           Iniciar Sesión
         </button>
         <a class="btn btn-secondary my-3 mx-2"> Olvidaste tu contraseña </a>

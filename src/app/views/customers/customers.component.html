@@ -9,21 +9,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let customer of customers">
             <td>
-              {{ product.id }}
+              {{ customer.id }}
+            </td>
+            <td>{{ customer.name }} {{ customer.lastname }}</td>
+            <td>
+              {{ customer.email }}
             </td>
             <td>
-              {{ product.name }}
+              {{ customer.address }}
             </td>
             <td>
-              {{ product.description }}
+              {{ customer.type }}
             </td>
             <td>
-              {{ product.value }}
+              {{ customer.count }}
             </td>
             <td>
-              <a><i class="bi bi-eye-fill"></i></a>
+              <a><i class="bi bi-cart-plus-fill"></i></a>
             </td>
             <td>
               <a><i class="bi bi-trash"></i></a>
@@ -34,7 +38,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="float">Crear Producto</button>
+      <button class="float">Crear cliente</button>
     </div>
   </div>
 </div>
