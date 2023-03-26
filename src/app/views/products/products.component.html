@@ -23,13 +23,14 @@
               {{ product.value }}
             </td>
             <td>
-              <a><i class="bi bi-eye-fill"></i></a>
+              <a (click)="openDialog(product)"
+                ><i class="bi bi-eye-fill"></i
+              ></a>
             </td>
             <td>
-              <a><i class="bi bi-trash"></i></a>
-            </td>
-            <td>
-              <a><i class="bi bi-pencil"></i></a>
+              <a (click)="deleteProduct(product)"
+                ><i class="bi bi-trash"></i
+              ></a>
             </td>
           </tr>
         </tbody>

@@ -13,4 +13,14 @@ export class ProductService {
       .get(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response as Product[]));
   }
+  put(url: string, data: Product): Observable<any> {
+    return this.http
+      .put(`${this.BASE_URL}/${url}`, data)
+      .pipe(map((response) => response));
+  }
+  del(url: string): Observable<any> {
+    return this.http
+      .delete(`${this.BASE_URL}/${url}`)
+      .pipe(map((response) => response));
+  }
 }
