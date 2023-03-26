@@ -26,6 +26,7 @@ import { ProductService } from './services/products/product.service';
 import { OrderService } from './services/orders/orders.service';
 import { UserService } from './services/users/users.service';
 import { OrderReviewComponent } from './views/orders/modal/order-review/order-review.component';
+import { ProductReviewComponent } from './views/products/product-review/product-review.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { OrderReviewComponent } from './views/orders/modal/order-review/order-re
     ReportsComponent,
     InfoComponent,
     OrderReviewComponent,
+    ProductReviewComponent,
   ],
   imports: [
     BrowserModule,
