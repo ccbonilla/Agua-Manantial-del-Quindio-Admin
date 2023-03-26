@@ -1,0 +1,56 @@
+<h2 mat-dialog-title class="title" align="center">
+  Pedido para {{ data.customer.name }}
+</h2>
+<form [formGroup]="formGroup" class="form">
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Nombre Cliente</mat-label>
+    <input
+      matInput
+      formControlName="nameCustomer"
+      [(ngModel)]="data.customer.name"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Apellido Cliente</mat-label>
+    <input
+      matInput
+      formControlName="lastNameCustomer"
+      [(ngModel)]="data.customer.lastname"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Dirección</mat-label>
+    <input
+      matInput
+      formControlName="address"
+      [(ngModel)]="data.customer.address"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="phone" [(ngModel)]="data.customer.phone" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Fecha pedido</mat-label>
+    <input matInput formControlName="date" [(ngModel)]="data.order_date" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Valor</mat-label>
+    <input matInput formControlName="amount" [(ngModel)]="data.value" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Cantidad de botellones</mat-label>
+    <input
+      matInput
+      formControlName="cant"
+      [(ngModel)]="data.details[0].product_cant"
+    />
+  </mat-form-field>
+
+  <mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close (click)="updateOrder()">
+      Modificar
+    </button>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </mat-dialog-actions>
+</form>

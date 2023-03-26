@@ -13,14 +13,11 @@ export class NavBarComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalstorageService<any>
   ) {
-    console.log('constructor');
     this.localStorageService.setItem('logged', false);
     this.logged = this.localStorageService.getItem('logged');
   }
 
-  ngOnInit(): void {
-    console.log('ngOnInit');
-  }
+  ngOnInit(): void {}
 
   logOut() {
     this.localStorageService.setItem('logged', false);

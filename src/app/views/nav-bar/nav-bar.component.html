@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-  <img class="logo" src="/assets/logo_manantial.png" />
+<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+  <img class="logo" src="/assets/logo_blanco.jpeg" />
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -23,14 +23,38 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#" [routerLink]="['/reports']"
-          >Reportes</a
-        >
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdown1"
+            data-toggle="dropdown"
+          >
+            Datos y reportes
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="http://www.google.com"
+              >Quiénes somos</a
+            >
+            <a class="dropdown-item" href="http://www.bing.com"
+              >Tipo de cliente</a
+            >
+            <a class="dropdown-item" href="http://www.yahoo.com"
+              >Ventas del mes</a
+            >
+            <a class="dropdown-item" href="http://www.yahoo.com"
+              >Ventas de la semana</a
+            >
+            <a class="dropdown-item" href="http://www.yahoo.com"
+              >Ventas del día</a
+            >
+          </div>
+        </div>
       </li>
     </ul>
     <div class="form-inline">
       <button
-        class="btn btn-outline-primary text-white justify-content-between"
+        class="btn btn-outline-dark text-white justify-content-between"
         type="submit"
         (click)="logOut()"
       >
