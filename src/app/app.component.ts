@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'agua-manantial-project';
-  constructor() {
-    console.log('home');
-  }
+  constructor() {}
 }

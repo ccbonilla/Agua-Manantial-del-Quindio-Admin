@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from 'src/app/services/products/product.service';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-products',
@@ -7,30 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
   titles = ['Código Producto', 'Nombre', 'Descripción', 'Valor'];
-  products = [
-    {
-      id: 1,
-      name: 'Botellón 20 Lts',
-      description: 'Botellón agua 20 litros',
-      value: 8000,
-    },
-    {
-      id: 2,
-      name: 'Agua Bolsa 600 ml',
-      description: 'Agua en bolsa 600 ml x 24 unidades',
-      value: 5000,
-    },
-    {
-      id: 3,
-      name: 'Soporte Botellón 20 Lts',
-      description: 'Soporte metálico para botellón agua 20 litros',
-      value: 20000,
-    },
-  ];
+  products: Product[] = [];
 
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProducts();
+  }
 
   logOut() {}
+
+  getProducts() {
+    this.productService.get('list').subscribe((prods) => {
+      console.log('prods', prods);
+      this.products = prods;
+    });
+  }
 }

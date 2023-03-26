@@ -3,32 +3,94 @@
 </nav>
 <div class="container">
   <div class="abs-center">
-    <form action="#" class="border p-5 form">
+    <form
+      action="#"
+      class="border p-5 form"
+      [formGroup]="miFormulario"
+      (ngSubmit)="logIn()"
+    >
       <div class="form-group">
         <h1 class="justify-content-center">Inicio de sesión</h1>
         <input
+          #email
           type="email"
           name="email"
           id="email"
           class="form-control my-3"
           placeholder="Correo electrónico"
+          formControlName="email"
         />
       </div>
       <div class="form-group">
         <input
+          #password
           type="password"
           name="password"
           id="password"
           class="form-control my-3"
           placeholder="Contraseña"
+          formControlName="password"
         />
       </div>
       <div>
-        <button class="btn btn-primary my-3" (click)="logIn()">
+        <button class="btn btn-primary my-3" type="submit">
           Iniciar Sesión
         </button>
         <a class="btn btn-secondary my-3 mx-2"> Olvidaste tu contraseña </a>
+        <h6 *ngIf="alert">Usuario o contraseña incorrectos</h6>
       </div>
     </form>
   </div>
 </div>
+
+<!-- <form
+  class="login100-form"
+  autocomplete="off"
+  [formGroup]="miFormulario"
+  (ngSubmit)="logIn()"
+>
+  <span class="login100-form-title p-b-49"> Login </span>
+
+  <div class="wrap-input100 m-b-23">
+    <span class="label-input100">Email</span>
+    <input
+      class="input100"
+      type="email"
+      formControlName="email"
+      placeholder="Ingrese su email"
+    />
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100">
+    <span class="label-input100">Password</span>
+    <input
+      class="input100"
+      type="password"
+      formControlName="password"
+      placeholder="Ingrese su contraseña"
+    />
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="text-right p-t-8 p-b-31"></div>
+
+  <div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+      <div class="login100-form-bgbtn"></div>
+      <button
+        class="login100-form-btn"
+        type="submit"
+        [disabled]="miFormulario.invalid"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+
+  <div class="flex-col-c p-t-60">
+    <span class="txt1 p-b-17"> ¿No tienes cuenta? </span>
+
+    <a routerLink="/auth/registro" class="txt2"> Crear una aquí </a>
+  </div>
+</form> -->
