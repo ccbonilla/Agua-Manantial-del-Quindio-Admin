@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class OrderReviewComponent implements OnInit {
   formGroup!: FormGroup;
+  state_options: any[] = [];
 
   constructor(
     private router: Router,
@@ -31,7 +32,9 @@ export class OrderReviewComponent implements OnInit {
       phone: [null, [Validators.required]],
       amount: [null, [Validators.required]],
       cant: [null, [Validators.required]],
+      state: [null, [Validators.required]],
     });
+    this.getStates();
   }
   updateOrder() {
     this.orderService
@@ -39,5 +42,14 @@ export class OrderReviewComponent implements OnInit {
       .subscribe((res) => {
         console.log('ok');
       });
+  }
+
+  getStates() {
+    this.orderService.getStates('list-order-states').subscribe((res) => {
+      console.log('res', res);
+
+      this.state_options = res;
+      console.log('states', this.state_options);
+    });
   }
 }

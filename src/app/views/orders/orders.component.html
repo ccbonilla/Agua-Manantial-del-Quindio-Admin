@@ -27,11 +27,15 @@
               <a (click)="openDialog(order)"><i class="bi bi-eye-fill"></i></a>
             </td>
 
-            <!-- <td>
-              <a><i class="bi bi-pencil"></i></a>
-            </td> -->
             <td>
-              <a><i class="bi bi-bicycle"></i></a>
+              <a (click)="changeState(order, 2)"
+                ><i class="bi bi-bicycle"></i
+              ></a>
+            </td>
+            <td>
+              <a (click)="changeState(order, 3)"
+                ><i class="bi bi-check2-all"></i
+              ></a>
             </td>
             <td>
               <a (click)="deleteOrder(order)"><i class="bi bi-trash"></i></a>

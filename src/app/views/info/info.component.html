@@ -1,18 +1,29 @@
 <app-nav-bar></app-nav-bar>
-<div>
-  <div>
-    <p><b>Quiénes somos</b></p>
-    <textarea></textarea>
-  </div>
-  <div>
-    <button class="button_info">Aceptar</button>
-  </div>
-</div>
-
-<div>
-  <p><b>Tipos de clientes</b></p>
-  <textarea></textarea>
-</div>
-<div>
-  <button class="button_customers">Crear nuevo tipo</button>
+<div class="container">
+  <mat-label>Quiénes somos</mat-label>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="aboutUs"></textarea>
+  </mat-form-field>
+  <mat-label>Visión</mat-label>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="vision"></textarea>
+  </mat-form-field>
+  <mat-label>Misión</mat-label>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="mision"></textarea>
+  </mat-form-field>
+  <mat-label>Teléfono</mat-label>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="phone"></textarea>
+  </mat-form-field>
+  <mat-label>Email</mat-label>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="email"></textarea>
+  </mat-form-field>
+  <button
+    class="btn btn-outline-dark text-white justify-content-between"
+    (click)="updateInfo()"
+  >
+    Enviar
+  </button>
 </div>

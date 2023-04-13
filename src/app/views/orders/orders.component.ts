@@ -50,7 +50,9 @@ export class OrdersComponent implements OnInit {
   logOut() {}
   getOrders() {
     this.orderService.get('list').subscribe((orders) => {
-      this.orders = orders;
+      this.orders = orders.filter(
+        (order) => order.order_state != 3 && order.order_state != 4
+      );
     });
   }
   openDialog(itemSelected: Order) {
@@ -87,5 +89,14 @@ export class OrdersComponent implements OnInit {
         this.getOrders();
       }
     });
+  }
+
+  changeState(itemSelected: Order, state: number) {
+    itemSelected.order_state = state;
+    this.orderService
+      .put(`update-state/${itemSelected.order_id}`, itemSelected)
+      .subscribe((res) => {
+        this.getOrders();
+      });
   }
 }

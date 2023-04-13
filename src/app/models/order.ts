@@ -3,6 +3,7 @@ export class Order {
   order_id: number = 0;
   user_id: number = 0;
   order_date: string = '';
+  order_state: number = 0;
   value: number = 0;
   discount: number = 0;
   payment_type_id: number = 0;
