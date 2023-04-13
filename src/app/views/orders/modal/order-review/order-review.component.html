@@ -46,7 +46,14 @@
       [(ngModel)]="data.details[0].product_cant"
     />
   </mat-form-field>
-
+  <!-- <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Seleccione una opción</mat-label>
+    <mat-select formControlName="state" [(ngModel)]="data.state">
+      <mat-option *ngFor="let item of state_options" [value]="item.id_state">
+        {{ item?.name_state }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
   <mat-dialog-actions align="center">
     <button mat-button mat-dialog-close (click)="updateOrder()">
       Modificar

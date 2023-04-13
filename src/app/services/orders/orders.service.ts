@@ -13,6 +13,11 @@ export class OrderService {
       .get(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response as Order[]));
   }
+  getStates(url: string): Observable<any> {
+    return this.http
+      .get(`${this.BASE_URL}/${url}`)
+      .pipe(map((response) => response));
+  }
   put(url: string, data: Order): Observable<any> {
     return this.http
       .put(`${this.BASE_URL}/${url}`, data)

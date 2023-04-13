@@ -10,7 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -27,6 +29,8 @@ import { OrderService } from './services/orders/orders.service';
 import { UserService } from './services/users/users.service';
 import { OrderReviewComponent } from './views/orders/modal/order-review/order-review.component';
 import { ProductReviewComponent } from './views/products/product-review/product-review.component';
+import { InfoService } from './services/infoService/info.service';
+import { UserTypeComponent } from './views/user-type/user-type.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,7 @@ import { ProductReviewComponent } from './views/products/product-review/product-
     InfoComponent,
     OrderReviewComponent,
     ProductReviewComponent,
+    UserTypeComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,8 +60,16 @@ import { ProductReviewComponent } from './views/products/product-review/product-
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatSelectModule,
+    FormsModule,
   ],
-  providers: [ProductService, OrderService, UserService, BsModalService],
+  providers: [
+    ProductService,
+    OrderService,
+    UserService,
+    BsModalService,
+    InfoService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
