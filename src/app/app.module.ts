@@ -13,6 +13,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -31,6 +39,7 @@ import { OrderReviewComponent } from './views/orders/modal/order-review/order-re
 import { ProductReviewComponent } from './views/products/product-review/product-review.component';
 import { InfoService } from './services/infoService/info.service';
 import { UserTypeComponent } from './views/user-type/user-type.component';
+import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +56,7 @@ import { UserTypeComponent } from './views/user-type/user-type.component';
     OrderReviewComponent,
     ProductReviewComponent,
     UserTypeComponent,
+    CreateOrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +72,14 @@ import { UserTypeComponent } from './views/user-type/user-type.component';
     MatListModule,
     MatSelectModule,
     FormsModule,
+    MatStepperModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatButtonToggleModule,
   ],
   providers: [
     ProductService,

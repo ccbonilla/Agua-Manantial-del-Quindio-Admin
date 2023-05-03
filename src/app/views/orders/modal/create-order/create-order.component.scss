@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 10%;
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+         Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.container {
+  padding: 10px;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 90%;
+  max-height: 60%;
+  width: 100%;
+  display: flex;
+}
+
+.form-element {
+  width: 60%;
+}
+
+button {
+  // position: fixed;
+  width: 120px;
+  height: 60px;
+  // bottom: 40px;
+  right: 40px;
+  background-color: grayscale($color: #000000);
+  color: #fff;
+  border-radius: 10px;
+  size: 40px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+}
+.mat-step {
+  display: flex;
+  overflow-x: auto;
+  background-color: blue;
+}

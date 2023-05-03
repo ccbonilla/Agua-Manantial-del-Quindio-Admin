@@ -12,6 +12,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { OrderReviewComponent } from './modal/order-review/order-review.component';
+import { CreateOrderComponent } from './modal/create-order/create-order.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -37,11 +39,12 @@ export class OrdersComponent implements OnInit {
   showModal = false;
   selectedItem: any;
   modalRef: any;
+  orderModelNew: Order = new Order();
 
   constructor(
     private orderService: OrderService,
     private dialog: MatDialog,
-    private modalService: BsModalService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +73,22 @@ export class OrdersComponent implements OnInit {
       this.getOrders();
     });
   }
+  createOrder() {
+    const position: DialogPosition = {
+      left: '10%',
+      top: '-150px',
+    };
+    const dialogRef = this.dialog.open(CreateOrderComponent, {
+      data: this.orderModelNew,
+      position: position,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getOrders();
+    });
+  }
+  // createOrder() {
+  //   this.router.navigate(['createOrder']);
+  // }
   deleteOrder(itemSelected: Order) {
     Swal.fire({
       title: '¡Hola!',

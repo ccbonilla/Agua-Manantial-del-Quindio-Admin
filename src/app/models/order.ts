@@ -7,6 +7,8 @@ export class Order {
   value: number = 0;
   discount: number = 0;
   payment_type_id: number = 0;
+  product_cant: number = 0;
+  product_id: number = 0;
   customer: User = {
     user_id: 0,
     name: '',
