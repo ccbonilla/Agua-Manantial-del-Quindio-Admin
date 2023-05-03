@@ -28,4 +28,9 @@ export class OrderService {
       .delete(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response));
   }
+  post(url: string, data: Order): Observable<any> {
+    return this.http
+      .post(`${this.BASE_URL}/${url}`, data)
+      .pipe(map((response) => response));
+  }
 }

@@ -7,6 +7,7 @@ import { ProductsComponent } from './views/products/products.component';
 import { CustomersComponent } from './views/customers/customers.component';
 import { ReportsComponent } from './views/reports/reports.component';
 import { InfoComponent } from './views/info/info.component';
+import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'info', component: InfoComponent },
+  { path: 'createOrder', component: CreateOrderComponent },
 ];
 
 @NgModule({
