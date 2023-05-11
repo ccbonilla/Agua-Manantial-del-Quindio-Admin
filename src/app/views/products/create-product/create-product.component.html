@@ -1,0 +1,24 @@
+<h2 mat-dialog-title class="title" align="center">Crear Producto</h2>
+<form [formGroup]="formGroup" class="form">
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Nombre Producto</mat-label>
+    <input matInput formControlName="name" [(ngModel)]="productModel.name" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Descripción Producto</mat-label>
+    <input
+      matInput
+      formControlName="description"
+      [(ngModel)]="productModel.description"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-element">
+    <mat-label>Valor Unitario</mat-label>
+    <input matInput formControlName="value" [(ngModel)]="productModel.value" />
+  </mat-form-field>
+
+  <mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close (click)="createOrder()">Crear</button>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </mat-dialog-actions>
+</form>

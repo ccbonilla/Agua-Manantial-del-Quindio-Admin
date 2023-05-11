@@ -40,6 +40,7 @@ import { ProductReviewComponent } from './views/products/product-review/product-
 import { InfoService } from './services/infoService/info.service';
 import { UserTypeComponent } from './views/user-type/user-type.component';
 import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
+import { CreateProductComponent } from './views/products/create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { CreateOrderComponent } from './views/orders/modal/create-order/create-o
     ProductReviewComponent,
     UserTypeComponent,
     CreateOrderComponent,
+    CreateProductComponent,
   ],
   imports: [
     BrowserModule,
