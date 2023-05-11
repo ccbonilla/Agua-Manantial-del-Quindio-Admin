@@ -68,11 +68,6 @@ export class CreateOrderComponent implements OnInit {
       descriptionProduct: [null, [Validators.required]],
       valueProduct: [null, [Validators.required]],
     });
-    // this.thirdFormGroup = this._formBuilderDate.group({
-    //   date: [null, [Validators.required]],
-    //   productQuantity: [null, [Validators.required]],
-    //   labelProduct: [null, [Validators.required]],
-    // });
   }
 
   selectCustomer(customer: User, stepper: MatStepper) {
@@ -99,8 +94,6 @@ export class CreateOrderComponent implements OnInit {
           cancelButtonText: 'Cancelar',
         }).then((result2) => {
           if (result2.isConfirmed) {
-            console.log('result', result2);
-
             this.orderModel.order_date = (
               document.getElementById('swal-input1') as HTMLInputElement
             ).value;

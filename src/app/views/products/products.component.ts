@@ -4,6 +4,7 @@ import { ProductReviewComponent } from './product-review/product-review.componen
 import { Product } from '../../models/product';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @Component({
   selector: 'app-products',
@@ -40,6 +41,20 @@ export class ProductsComponent implements OnInit {
       width: '630px',
       position: position,
       data: itemSelected,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getProducts();
+    });
+  }
+  openDialogNew() {
+    const position: DialogPosition = {
+      left: '30%',
+      top: '-220px',
+    };
+    const dialogRef = this.dialog.open(CreateProductComponent, {
+      height: '400px',
+      width: '630px',
+      position: position,
     });
     dialogRef.afterClosed().subscribe((res) => {
       this.getProducts();

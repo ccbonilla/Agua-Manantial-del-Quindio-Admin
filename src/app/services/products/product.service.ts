@@ -23,4 +23,9 @@ export class ProductService {
       .delete(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response));
   }
+  create(url: string, data: Product): Observable<any> {
+    return this.http
+      .post(`${this.BASE_URL}/${url}`, data)
+      .pipe(map((response) => response));
+  }
 }
