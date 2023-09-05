@@ -21,6 +21,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -41,6 +44,9 @@ import { InfoService } from './services/infoService/info.service';
 import { UserTypeComponent } from './views/user-type/user-type.component';
 import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
 import { CreateProductComponent } from './views/products/create-product/create-product.component';
+import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
+import { CustomerReviewComponent } from './views/customers/customer-review/customer-review.component';
+import { SaleCartComponent } from './views/orders/sale-cart/sale-cart.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +65,9 @@ import { CreateProductComponent } from './views/products/create-product/create-p
     UserTypeComponent,
     CreateOrderComponent,
     CreateProductComponent,
+    CreateCustomerComponent,
+    CustomerReviewComponent,
+    SaleCartComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +91,9 @@ import { CreateProductComponent } from './views/products/create-product/create-p
     MatExpansionModule,
     MatCardModule,
     MatButtonToggleModule,
+    MatSidenavModule,
+    MatDividerModule,
+    FlexLayoutModule,
   ],
   providers: [
     ProductService,

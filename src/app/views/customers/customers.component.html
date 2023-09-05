@@ -25,7 +25,12 @@
             </td>
             <td>{{ customer.count }}</td>
             <td>
-              <a><i class="bi bi-cart-plus-fill"></i></a>
+              <a
+                ><i
+                  class="bi bi-cart-plus-fill"
+                  (click)="createOrder(customer.user_id)"
+                ></i
+              ></a>
             </td>
             <td>
               <a><i class="bi bi-trash"></i></a>

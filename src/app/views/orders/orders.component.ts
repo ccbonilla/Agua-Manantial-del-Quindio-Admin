@@ -9,6 +9,7 @@ import {
 } from '@angular/animations';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { OrderReviewComponent } from './modal/order-review/order-review.component';
@@ -32,7 +33,13 @@ import { Router } from '@angular/router';
   ],
 })
 export class OrdersComponent implements OnInit {
-  titles = ['N°', 'Fecha de pedido', 'Cliente', 'Dirección', 'valor'];
+  titles: string[] = [
+    'id',
+    'Fecha de entrega',
+    'Cliente',
+    'Dirección',
+    'Valor',
+  ];
   orders: Order[] = [];
 
   title = 'Pedidos';
@@ -40,12 +47,15 @@ export class OrdersComponent implements OnInit {
   selectedItem: any;
   modalRef: any;
   orderModelNew: Order = new Order();
+  dataSource: MatTableDataSource<Order>;
 
   constructor(
     private orderService: OrderService,
     private dialog: MatDialog,
     private router: Router
-  ) {}
+  ) {
+    this.dataSource = new MatTableDataSource(this.orders);
+  }
 
   ngOnInit(): void {
     this.getOrders();
@@ -56,6 +66,7 @@ export class OrdersComponent implements OnInit {
       this.orders = orders.filter(
         (order) => order.order_state != 3 && order.order_state != 4
       );
+      this.dataSource = new MatTableDataSource(this.orders);
     });
   }
   openDialog(itemSelected: Order) {
@@ -73,22 +84,25 @@ export class OrdersComponent implements OnInit {
       this.getOrders();
     });
   }
-  createOrder() {
-    const position: DialogPosition = {
-      left: '10%',
-      top: '-150px',
-    };
-    const dialogRef = this.dialog.open(CreateOrderComponent, {
-      data: this.orderModelNew,
-      position: position,
-    });
-    dialogRef.afterClosed().subscribe((res) => {
-      this.getOrders();
-    });
-  }
   // createOrder() {
-  //   this.router.navigate(['createOrder']);
+  //   const position: DialogPosition = {
+  //     left: '10%',
+  //     top: '-400px',
+  //   };
+  //   const dialogRef = this.dialog.open(CreateOrderComponent, {
+  //     data: this.orderModelNew,
+  //     position: position,
+  //   });
+  //   dialogRef.afterClosed().subscribe((res) => {
+  //     this.getOrders();
+  //   });
   // }
+  createOrder() {
+    this.router.navigate([
+      'createOrder',
+      { state: { data: this.orderModelNew } },
+    ]);
+  }
   deleteOrder(itemSelected: Order) {
     Swal.fire({
       title: '¡Hola!',

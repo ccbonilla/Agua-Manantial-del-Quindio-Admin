@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
 import { OrderService } from '../../services/orders/orders.service';
+import { CreateOrderComponent } from '../orders/modal/create-order/create-order.component';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Order } from 'src/app/models/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -18,6 +23,7 @@ export class CustomersComponent implements OnInit {
     'Compras acumuladas',
   ];
   customers: User[] = [];
+  orderModelNew: Order = new Order();
   // customers = [
   //   {
   //     id: 1,
@@ -49,7 +55,9 @@ export class CustomersComponent implements OnInit {
   // ];
   constructor(
     private userService: UserService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private dialog: MatDialog,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +67,22 @@ export class CustomersComponent implements OnInit {
   getUsers() {
     this.userService.get('list').subscribe((users) => {
       this.customers = users;
+    });
+  }
+  createOrder(user_id: number) {
+    console.log('user id enviado desde customers', user_id);
+
+    this.orderModelNew.customer.user_id = user_id;
+    const position: DialogPosition = {
+      left: '10%',
+      top: '-150px',
+    };
+    const dialogRef = this.dialog.open(CreateOrderComponent, {
+      data: this.orderModelNew,
+      position: position,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.route.navigate(['customers']);
     });
   }
 }
