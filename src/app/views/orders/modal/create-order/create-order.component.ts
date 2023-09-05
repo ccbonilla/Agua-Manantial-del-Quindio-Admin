@@ -4,15 +4,18 @@ import { OrderService } from 'src/app/services/orders/orders.service';
 import { UserService } from 'src/app/services/users/users.service';
 import { ProductService } from 'src/app/services/products/product.service';
 import { Order } from 'src/app/models/order';
+import { ProductOrder } from 'src/app/models/product_order';
 import { User } from 'src/app/models/user';
 import { Product } from 'src/app/models/product';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { SaleCartComponent } from '../../sale-cart/sale-cart.component';
 
 @Component({
   selector: 'app-create-order',
@@ -27,15 +30,26 @@ export class CreateOrderComponent implements OnInit {
   productList!: Product[];
   state_options: any[] = [];
   orderModel: Order = new Order();
-  productModel: Product = new Product();
+  productsModel: ProductOrder[] = [];
   dataSourceUser: MatTableDataSource<User>;
   dataSourceProduct: MatTableDataSource<Product>;
+  dataSourceProductOrder: MatTableDataSource<ProductOrder>;
   displayedColumns: string[] = ['name', 'lastName', 'address', 'phone'];
   displayedColumnsproduct: string[] = ['name', 'description', 'value'];
+  displayedColumnsProductOrder: string[] = [
+    // 'id',
+    'nameProduct',
+    'value',
+    'cant',
+    'subtotal',
+    'deleteProduct',
+  ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort = new MatSort();
   selected: Date | null;
   productQuantity: number = 0;
+  next = false;
+  customerSelected = false;
 
   constructor(
     private _formBuilderDate: FormBuilder,
@@ -44,11 +58,12 @@ export class CreateOrderComponent implements OnInit {
     private orderService: OrderService,
     private userService: UserService,
     private productService: ProductService,
-    private router: Router,
-    private dialogRef: MatDialogRef<CreateOrderComponent>
+    private dialog: MatDialog,
+    private router: Router // private dialogRef: MatDialogRef<CreateOrderComponent>
   ) {
     this.dataSourceUser = new MatTableDataSource(this.userModel);
     this.dataSourceProduct = new MatTableDataSource(this.productList);
+    this.dataSourceProductOrder = new MatTableDataSource(this.productsModel);
     this.selected = new Date();
   }
   ngOnInit(): void {
@@ -68,14 +83,17 @@ export class CreateOrderComponent implements OnInit {
       descriptionProduct: [null, [Validators.required]],
       valueProduct: [null, [Validators.required]],
     });
+    if (this.orderModel.customer.user_id > 0) {
+      this.next = true;
+    }
   }
 
-  selectCustomer(customer: User, stepper: MatStepper) {
+  selectCustomer(customer: User) {
     this.orderModel.customer = customer;
-    stepper.next();
+    this.customerSelected = true;
   }
-  selectProduct(product: Product, stepper: MatStepper) {
-    this.productModel = product;
+  selectProduct(product: Product) {
+    let newProduct = new ProductOrder();
     Swal.fire({
       title: 'Ingrese la cantidad de producto',
       input: 'number',
@@ -85,38 +103,52 @@ export class CreateOrderComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productQuantity = result.value;
-        Swal.fire({
-          title: 'Seleccione una fecha:',
-          html: '<input type="date" id="swal-input1" class="swal2-input">',
-          confirmButtonText: 'Enviar',
-          showCancelButton: true,
-          cancelButtonText: 'Cancelar',
-        }).then((result2) => {
-          if (result2.isConfirmed) {
-            this.orderModel.order_date = (
-              document.getElementById('swal-input1') as HTMLInputElement
-            ).value;
-            this.createOrder();
-          }
-        });
+        newProduct.product_cant = result.value;
+        newProduct.product_id = product.product_id;
+        newProduct.name = product.name;
+        newProduct.value = product.value;
+        this.productsModel.push(newProduct);
+        this.dataSourceProductOrder = new MatTableDataSource(
+          this.productsModel
+        );
       }
     });
+    console.log('carrito', this.productsModel);
   }
   createOrder() {
-    let orderNew = new Order();
-    orderNew.discount = 0;
-    orderNew.order_date = this.orderModel.order_date;
-    orderNew.order_state = 1;
-    orderNew.user_id = this.orderModel.customer.user_id;
-    orderNew.payment_type_id = 1;
-    orderNew.value = this.productModel.value * Number(this.productQuantity);
-    orderNew.product_cant = this.productQuantity;
-    orderNew.product_id = this.productModel.product_id;
-
-    this.orderService.post('create', orderNew).subscribe((sub) => {
-      this.dialogRef.close();
-      this.router.navigate(['orders']);
+    Swal.fire({
+      title: 'Seleccione una fecha:',
+      html: '<input type="date" id="swal-input1" class="swal2-input">',
+      confirmButtonText: 'Enviar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then((result2) => {
+      if (result2.isConfirmed) {
+        this.orderModel.order_date = (
+          document.getElementById('swal-input1') as HTMLInputElement
+        ).value;
+        let orderNew = new Order();
+        orderNew.discount = 0;
+        orderNew.order_date = this.orderModel.order_date;
+        orderNew.order_state = 1;
+        orderNew.user_id = this.orderModel.customer.user_id;
+        orderNew.payment_type_id = 1;
+        orderNew.customer = this.orderModel.customer;
+        orderNew.products = this.productsModel;
+        this.orderService.post('create', orderNew).subscribe((sub) => {
+          Swal.fire({
+            title: 'Pedido guardado correctamente',
+            icon: 'success',
+            confirmButtonText: 'Enviar',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+          }).then((response) => {
+            if (response.isConfirmed) {
+              this.router.navigate(['orders']);
+            }
+          });
+        });
+      }
     });
   }
 
@@ -133,5 +165,32 @@ export class CreateOrderComponent implements OnInit {
       this.dataSourceProduct.paginator = this.paginator;
       this.dataSourceProduct.sort = this.sort;
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceUser.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceUser.paginator) {
+      this.dataSourceUser.paginator.firstPage();
+    }
+  }
+  addCant(product: ProductOrder) {
+    product.product_cant++;
+  }
+  removeCant(product: ProductOrder) {
+    product.product_cant--;
+  }
+  removeProduct(product: ProductOrder) {
+    this.productsModel.splice(this.productsModel.indexOf(product), 1);
+    this.dataSourceProductOrder = new MatTableDataSource(this.productsModel);
+  }
+  getTotalValues() {
+    let total = 0;
+    for (let index = 0; index < this.productsModel.length; index++) {
+      total +=
+        this.productsModel[index].value *
+        this.productsModel[index].product_cant;
+    }
+    return total;
   }
 }

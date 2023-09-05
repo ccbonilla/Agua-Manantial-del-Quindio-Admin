@@ -8,6 +8,7 @@ import { CustomersComponent } from './views/customers/customers.component';
 import { ReportsComponent } from './views/reports/reports.component';
 import { InfoComponent } from './views/info/info.component';
 import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
+import { SaleCartComponent } from './views/orders/sale-cart/sale-cart.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'info', component: InfoComponent },
   { path: 'createOrder', component: CreateOrderComponent },
+  { path: 'saleCart', component: SaleCartComponent },
 ];
 
 @NgModule({
