@@ -1,0 +1,17 @@
+<h6>Productos en la orden de compra</h6>
+<ul>
+  <li *ngFor="let product of products">
+    {{ product.product_id }} - Cantidad: {{ product.product_cant }}
+    <button mat-icon-button color="warn" (click)="removeQuantity(product)">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="addQuantity(product)"
+      class="button"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </li>
+</ul>
