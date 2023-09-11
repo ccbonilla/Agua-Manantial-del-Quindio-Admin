@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
+  
   public logged: boolean;
   constructor(
     private router: Router,
