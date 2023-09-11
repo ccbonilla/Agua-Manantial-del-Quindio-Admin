@@ -16,6 +16,11 @@ export class UserService {
       .get(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response as User[]));
   }
+  delete(url: string): Observable<any> {
+    return this.http
+      .delete(`${this.BASE_URL}/${url}`)
+      .pipe(map((response) => response));
+  }
   login(email: string, password: string) {
     const body = { email, password };
     const url = `${this.BASE_URL}/login`;

@@ -46,7 +46,7 @@ import { CreateOrderComponent } from './views/orders/modal/create-order/create-o
 import { CreateProductComponent } from './views/products/create-product/create-product.component';
 import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
 import { CustomerReviewComponent } from './views/customers/customer-review/customer-review.component';
-import { SaleCartComponent } from './views/orders/sale-cart/sale-cart.component';
+import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,7 @@ import { SaleCartComponent } from './views/orders/sale-cart/sale-cart.component'
     CreateProductComponent,
     CreateCustomerComponent,
     CustomerReviewComponent,
-    SaleCartComponent,
+    DetailOrderComponent,
   ],
   imports: [
     BrowserModule,

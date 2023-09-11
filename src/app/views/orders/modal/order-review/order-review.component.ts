@@ -46,10 +46,7 @@ export class OrderReviewComponent implements OnInit {
 
   getStates() {
     this.orderService.getStates('list-order-states').subscribe((res) => {
-      console.log('res', res);
-
       this.state_options = res;
-      console.log('states', this.state_options);
     });
   }
 }

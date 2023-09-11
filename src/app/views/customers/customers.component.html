@@ -33,10 +33,15 @@
               ></a>
             </td>
             <td>
-              <a><i class="bi bi-trash"></i></a>
+              <a
+                ><i
+                  class="bi bi-trash"
+                  (click)="deleteCustomer(customer.user_id)"
+                ></i
+              ></a>
             </td>
             <td>
-              <a><i class="bi bi-pencil"></i></a>
+              <a><i class="bi bi-pencil" (click)="getUsers()"></i></a>
             </td>
           </tr>
         </tbody>
