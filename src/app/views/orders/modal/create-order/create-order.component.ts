@@ -7,7 +7,7 @@ import { Order } from 'src/app/models/order';
 import { ProductOrder } from 'src/app/models/product_order';
 import { User } from 'src/app/models/user';
 import { Product } from 'src/app/models/product';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,7 +15,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { SaleCartComponent } from '../../sale-cart/sale-cart.component';
 
 @Component({
   selector: 'app-create-order',
@@ -28,6 +27,7 @@ export class CreateOrderComponent implements OnInit {
   thirdFormGroup!: FormGroup;
   userModel!: User[];
   productList!: Product[];
+  userList!: User[];
   state_options: any[] = [];
   orderModel: Order = new Order();
   productsModel: ProductOrder[] = [];
@@ -37,7 +37,6 @@ export class CreateOrderComponent implements OnInit {
   displayedColumns: string[] = ['name', 'lastName', 'address', 'phone'];
   displayedColumnsproduct: string[] = ['name', 'description', 'value'];
   displayedColumnsProductOrder: string[] = [
-    // 'id',
     'nameProduct',
     'value',
     'cant',
@@ -59,6 +58,7 @@ export class CreateOrderComponent implements OnInit {
     private userService: UserService,
     private productService: ProductService,
     private dialog: MatDialog,
+    private route: ActivatedRoute,
     private router: Router // private dialogRef: MatDialogRef<CreateOrderComponent>
   ) {
     this.dataSourceUser = new MatTableDataSource(this.userModel);
@@ -113,7 +113,6 @@ export class CreateOrderComponent implements OnInit {
         );
       }
     });
-    console.log('carrito', this.productsModel);
   }
   createOrder() {
     Swal.fire({
@@ -137,11 +136,9 @@ export class CreateOrderComponent implements OnInit {
         orderNew.products = this.productsModel;
         this.orderService.post('create', orderNew).subscribe((sub) => {
           Swal.fire({
-            title: 'Pedido guardado correctamente',
+            title: `Pedido guardado correctamente con un descuento de $${sub.discount}`,
             icon: 'success',
-            confirmButtonText: 'Enviar',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Aceptar',
           }).then((response) => {
             if (response.isConfirmed) {
               this.router.navigate(['orders']);
@@ -154,9 +151,21 @@ export class CreateOrderComponent implements OnInit {
 
   getCustomers() {
     this.userService.get('list').subscribe((sub) => {
-      this.dataSourceUser = new MatTableDataSource(sub);
+      this.userList = sub;
+      this.dataSourceUser = new MatTableDataSource(this.userList);
       this.dataSourceUser.paginator = this.paginator;
       this.dataSourceUser.sort = this.sort;
+      this.route.params.subscribe((params) => {
+        if (params['customer_id'] != '0') {
+          console.log('parametro', params['customer_id']);
+
+          this.orderModel.user_id = JSON.parse(params['customer_id']);
+          this.orderModel.customer = this.userList.find(
+            (user) => user.user_id == this.orderModel.user_id
+          ) as User;
+          this.customerSelected = true;
+        }
+      });
     });
   }
   getProducts() {

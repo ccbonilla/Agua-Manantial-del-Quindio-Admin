@@ -1,0 +1,86 @@
+.container {
+  width: 600px;
+  height: 500px;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 30px;
+  padding-top: 20px;
+}
+.table-container {
+  // width: 600px;
+  // height: 500px;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  // margin-top: 30px;
+  // padding-top: 20px;
+}
+.header {
+  width: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-trash {
+  color: red;
+}
+.button-minus {
+  color: brown;
+}
+.button-add {
+  color: green;
+}
+.button-left {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 120px;
+  height: 60px;
+  background-color: grayscale($color: #000000);
+  color: #fff;
+  border-radius: 10px;
+  size: 40px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+}
+.button-rigth {
+  position: absolute;
+  bottom: 0;
+  right: 45%;
+  width: 120px;
+  height: 60px;
+  background-color: grayscale($color: #000000);
+  color: #fff;
+  border-radius: 10px;
+  size: 40px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+.float {
+  position: relative;
+  width: 120px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: grayscale($color: #000000);
+  color: #fff;
+  border-radius: 10px;
+  size: 40px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+.table tr:nth-child(odd) {
+  background-color: white;
+}
+
+.table tr:nth-child(even) {
+  background-color: #dddbdb;
+}

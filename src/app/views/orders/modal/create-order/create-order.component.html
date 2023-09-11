@@ -2,7 +2,7 @@
 <div fxLayout="row" fxLayoutGap="20px">
   <div fxFlex="50%">
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="!customerSelected">
         <mat-expansion-panel-header>
           Seleccione el Cliente ⬇️ 
         </mat-expansion-panel-header>

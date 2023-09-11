@@ -1,0 +1,47 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="header">
+    <h1>Pedido # {{ order.order_id }}</h1>
+  </div>
+  <h3>Cliente : {{ order.customer.name }} {{ order.customer.lastname }}</h3>
+  <h3>Dirección : {{ order.customer.address }}</h3>
+  <h3>fecha de entrega : {{ order.order_date }}</h3>
+  <div class="table-container">
+    <mat-table mat-table [dataSource]="dataSource" matSort class="table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Id del producto
+        </th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.product_id }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Nombre del producto
+        </th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.product_name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="cant">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>cantidad</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.product_cant }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="titles"></tr>
+      <tr mat-row *matRowDef="let row; columns: titles"></tr>
+    </mat-table>
+    <div>
+      <button
+        mat-button
+        cdkFocusInitial
+        class="button-rigth"
+        (click)="goToOrderList()"
+      >
+        Volver
+      </button>
+    </div>
+  </div>
+</div>

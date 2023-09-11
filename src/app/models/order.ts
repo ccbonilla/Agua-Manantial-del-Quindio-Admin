@@ -21,4 +21,5 @@ export class Order {
     user_type_name: '',
   };
   products: ProductOrder[] = [];
+  details: ProductOrder[] = [];
 }

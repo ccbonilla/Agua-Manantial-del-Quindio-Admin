@@ -70,19 +70,12 @@ export class CustomersComponent implements OnInit {
     });
   }
   createOrder(user_id: number) {
-    console.log('user id enviado desde customers', user_id);
+    this.route.navigate(['createOrder', user_id]);
+  }
 
-    this.orderModelNew.customer.user_id = user_id;
-    const position: DialogPosition = {
-      left: '10%',
-      top: '-150px',
-    };
-    const dialogRef = this.dialog.open(CreateOrderComponent, {
-      data: this.orderModelNew,
-      position: position,
-    });
-    dialogRef.afterClosed().subscribe((res) => {
-      this.route.navigate(['customers']);
+  deleteCustomer(user_id: number) {
+    this.userService.delete(`delete/${user_id}`).subscribe((resp) => {
+      this.getUsers();
     });
   }
 }

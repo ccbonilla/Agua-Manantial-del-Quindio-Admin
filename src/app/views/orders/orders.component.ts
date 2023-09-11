@@ -15,6 +15,7 @@ import { OrderService } from '../../services/orders/orders.service';
 import { OrderReviewComponent } from './modal/order-review/order-review.component';
 import { CreateOrderComponent } from './modal/create-order/create-order.component';
 import { Router } from '@angular/router';
+import { DetailOrderComponent } from './detail-order/detail-order.component';
 
 @Component({
   selector: 'app-orders',
@@ -35,10 +36,11 @@ import { Router } from '@angular/router';
 export class OrdersComponent implements OnInit {
   titles: string[] = [
     'id',
-    'Fecha de entrega',
+    'Fecha_de_entrega',
     'Cliente',
-    'Dirección',
+    'Direccion',
     'Valor',
+    'Acciones',
   ];
   orders: Order[] = [];
 
@@ -69,39 +71,17 @@ export class OrdersComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.orders);
     });
   }
-  openDialog(itemSelected: Order) {
-    const position: DialogPosition = {
-      left: '30%',
-      top: '-220px',
-    };
-    const dialogRef = this.dialog.open(OrderReviewComponent, {
-      height: '560px',
-      width: '630px',
-      position: position,
-      data: itemSelected,
-    });
-    dialogRef.afterClosed().subscribe((res) => {
-      this.getOrders();
+  openDialog(order: Order) {
+    this.router.navigate(['reviewOrder', JSON.stringify(order)], {
+      state: {
+        customer: order.customer,
+        products: order.products,
+      },
     });
   }
-  // createOrder() {
-  //   const position: DialogPosition = {
-  //     left: '10%',
-  //     top: '-400px',
-  //   };
-  //   const dialogRef = this.dialog.open(CreateOrderComponent, {
-  //     data: this.orderModelNew,
-  //     position: position,
-  //   });
-  //   dialogRef.afterClosed().subscribe((res) => {
-  //     this.getOrders();
-  //   });
-  // }
+
   createOrder() {
-    this.router.navigate([
-      'createOrder',
-      { state: { data: this.orderModelNew } },
-    ]);
+    this.router.navigate(['createOrder', 0]);
   }
   deleteOrder(itemSelected: Order) {
     Swal.fire({
