@@ -24,6 +24,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -94,6 +95,7 @@ import { DetailOrderComponent } from './views/orders/detail-order/detail-order.c
     MatSidenavModule,
     MatDividerModule,
     FlexLayoutModule,
+    NgChartsModule,
   ],
   providers: [
     ProductService,
