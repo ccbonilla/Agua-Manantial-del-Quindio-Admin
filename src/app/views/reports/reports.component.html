@@ -10,10 +10,11 @@
 </div>
 
 <div class="chart-container">
-    <button (click)="changeChartType('bar')">Ventas del día</button>
-    <button (click)="changeChartType('line')">Ventas semanal</button>
-    <button (click)="changeChartType('pie')">Ventas del mes</button>
-    <canvas id="myChart" ></canvas>
+    <button (click)="changeChartType('dia')">Ventas del día</button>
+    <button (click)="changeChartType('semana')">Ventas semanal</button>
+    <button (click)="changeChartType('mes')">Ventas del mes</button>
+    
+    <canvas #myChart ></canvas>
 </div>
 
 

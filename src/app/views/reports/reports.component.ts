@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
@@ -11,7 +11,9 @@ Chart.register(Colors);
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
-export class ReportsComponent implements OnInit {
+export class ReportsComponent implements OnInit, AfterViewInit {
+  
+  @ViewChild('myChart', { static: true }) myChartCanvas!: ElementRef;
 
   chart : any;
   orders: Order[] = [];
@@ -20,28 +22,51 @@ export class ReportsComponent implements OnInit {
   data: number[] = [];
   labels: string[] = [];
   isLoading: boolean = true;
+  isChartJsInitialized: boolean = false;
   public currentChartType = 'bar';
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) {}
 
   public changeChartType(newChartType: string): void {
+    this.isLoading = true;
     this.currentChartType = newChartType;
-    this.generarChart(); // Vuelve a generar el gráfico con el nuevo tipo
+
+    this.orders = [];
+    this.labels= [];
+    this.data = [];
+
+    if (newChartType === 'dia') {
+      this.startDate = new Date();
+      this.endDate = new Date();
+    } else if (newChartType === 'semana') {
+      this.getWeekRange();
+    } else if (newChartType === 'mes') {
+      this.getMonthRange();
+    }
+
+    this.getOrdersAndFilter(); // Vuelve a consultar los order y generar el gráfico
   }
 
   actualizarChart() {
     // Resto del código de configuración del gráfico
   
-    const chartType = this.currentChartType;
-  
-    var myChart;
+    //const chartType = this.myChartCanvas.nativeElement;
+
+    //this.myCanvas.nativeElement;
+    //
+    //var myChart;
 
     //this.getOrders();
   
     this.isLoading = false;
   }
+
+  ngAfterViewInit() {
+    // En ngAfterViewInit, myChartCanvas estará disponible.
+    this.getOrdersAndFilter();
+  }
   
-  getOrders() {
+  getOrdersAndFilter() {
 
     console.log('start date '+this.startDate);
     const stringStartDate = this.startDate.toISOString().slice(0, 10);
@@ -52,7 +77,7 @@ export class ReportsComponent implements OnInit {
     this.orderService.get('list').subscribe((orders) => {
 
       orders.forEach((order) => {
-        if(order.order_date <= stringStartDate && order.order_date >= stringStartDate){
+        if( stringStartDate <= order.order_date && stringEndDate >= order.order_date ){
           console.log('match '+JSON.stringify(order));
           this.orders.push(order); 
           this.labels.push(order.order_date);
@@ -95,8 +120,20 @@ export class ReportsComponent implements OnInit {
 
     return `Desde ${firstDayFormatted} hasta ${lastDayFormatted}`;
   }
-  
+
   generarChart() {
+    //condicional permite conocer si es actualizacion o se creara el canvas por primera vez
+    if (this.isChartJsInitialized) {
+      
+      this.chart.data.labels = this.labels;
+      this.chart.data.datasets[0].data = this.data;
+      //this.chart.data.datasets[1].data = this.orderProducts.axisX_sumTotal;
+      this.chart.update();
+      this.isLoading = false;
+      return;
+    }
+    this.isChartJsInitialized = true;
+
     function getRandomHexColor(alpha = 0.3) {
       const r = Math.floor(Math.random() * 256);
       const g = Math.floor(Math.random() * 256);
@@ -111,7 +148,9 @@ export class ReportsComponent implements OnInit {
     const borderColor = backgroundColor;
 
     // Configuración del gráfico
-    var myChart = new Chart("myChart", {
+    const canvas = this.myChartCanvas.nativeElement;
+
+    this.chart = new Chart(canvas, {
       type: 'bar',
       data: {
           labels: this.labels,
@@ -131,6 +170,7 @@ export class ReportsComponent implements OnInit {
           }
       }
     });
+    
     this.isLoading = false;
   }
 
@@ -140,6 +180,6 @@ export class ReportsComponent implements OnInit {
       const tipoventas = queryParams['tipoventas'];
       console.log('tipo:', tipoventas);
     });
-    this.getOrders();
+    
   }
 }
