@@ -1,5 +1,20 @@
 <app-nav-bar></app-nav-bar>
-<h1>Ventas</h1>
-<div class="tu-div">
+<div class="centered">
+    <h1>Gráfico de Ventas</h1>
+</div>
+<div *ngIf="isLoading">
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Cargando datos...</p>
+    </div>
+</div>
+
+<div class="chart-container">
+    <button (click)="changeChartType('bar')">Ventas del día</button>
+    <button (click)="changeChartType('line')">Ventas semanal</button>
+    <button (click)="changeChartType('pie')">Ventas del mes</button>
     <canvas id="myChart" ></canvas>
 </div>
+
+
+

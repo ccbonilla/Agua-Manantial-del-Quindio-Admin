@@ -15,21 +15,89 @@ export class ReportsComponent implements OnInit {
 
   chart : any;
   orders: Order[] = [];
+  public startDate: Date = new Date();
+  public endDate: Date = new Date();
+  data: number[] = [];
+  labels: string[] = [];
+  isLoading: boolean = true;
+  public currentChartType = 'bar';
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) {}
+
+  public changeChartType(newChartType: string): void {
+    this.currentChartType = newChartType;
+    this.generarChart(); // Vuelve a generar el gráfico con el nuevo tipo
+  }
+
+  actualizarChart() {
+    // Resto del código de configuración del gráfico
+  
+    const chartType = this.currentChartType;
+  
+    var myChart;
+
+    //this.getOrders();
+  
+    this.isLoading = false;
+  }
   
   getOrders() {
+
+    console.log('start date '+this.startDate);
+    const stringStartDate = this.startDate.toISOString().slice(0, 10);
+    console.log(stringStartDate);
+    const stringEndDate = this.endDate.toISOString().slice(0, 10);
+    console.log(stringEndDate);
+
     this.orderService.get('list').subscribe((orders) => {
-      this.orders = orders.filter(
-        (order) => order.order_state != 3 && order.order_state != 4
-      );
+
+      orders.forEach((order) => {
+        if(order.order_date <= stringStartDate && order.order_date >= stringStartDate){
+          console.log('match '+JSON.stringify(order));
+          this.orders.push(order); 
+          this.labels.push(order.order_date);
+          this.data.push(order.value);
+        }
+      });
+      this.generarChart();
     });
+    //const semana = this.getWeekRange();
+    //console.log(semana);
+  }
+
+  getWeekRange() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDay();
+    const firstDayOfWeek = new Date(currentDate);
+    const lastDayOfWeek = new Date(currentDate);
+
+    firstDayOfWeek.setDate(currentDate.getDate() - currentDay + 1);
+
+    lastDayOfWeek.setDate(currentDate.getDate() + (7 - currentDay));
+
+    const firstDayFormatted = firstDayOfWeek;
+    const lastDayFormatted = lastDayOfWeek;
+    console.log('fin get week '+ `Desde ${firstDayFormatted} hasta ${lastDayFormatted}`);
+
+    this.startDate = firstDayOfWeek;
+    this.endDate = lastDayOfWeek;
+
+    return `Desde ${firstDayFormatted} hasta ${lastDayFormatted}`;
+  }
+
+  getMonthRange() {
+    const currentDate = new Date();
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    const firstDayFormatted = firstDayOfMonth;
+    const lastDayFormatted = lastDayOfMonth;
+
+    return `Desde ${firstDayFormatted} hasta ${lastDayFormatted}`;
   }
   
   generarChart() {
-    // Función para generar colores hexadecimales aleatorios
     function getRandomHexColor(alpha = 0.3) {
-      // Generar valores aleatorios para R, G y B en el rango [0, 255]
       const r = Math.floor(Math.random() * 256);
       const g = Math.floor(Math.random() * 256);
       const b = Math.floor(Math.random() * 256);
@@ -38,23 +106,18 @@ export class ReportsComponent implements OnInit {
     
       return rgbaColor;
     }
-    
-    // Datos para el gráfico (puedes actualizar estos datos según tus necesidades)
-    const labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
-    const data = [12, 19, 3, 5, 2, 3];
 
-    // Genera colores hexadecimales aleatorios para backgroundColor y borderColor
-    const backgroundColor = labels.map(() => getRandomHexColor());
-    const borderColor = backgroundColor; // El borderColor es el mismo que backgroundColor
+    const backgroundColor = this.labels.map(() => getRandomHexColor());
+    const borderColor = backgroundColor;
 
     // Configuración del gráfico
     var myChart = new Chart("myChart", {
       type: 'bar',
       data: {
-          labels: labels,
+          labels: this.labels,
           datasets: [{
-              label: '# of Votes',
-              data: data,
+              label: 'ventas de día',
+              data: this.data,
               backgroundColor: backgroundColor,
               borderColor: borderColor,
               borderWidth: 1
@@ -68,6 +131,7 @@ export class ReportsComponent implements OnInit {
           }
       }
     });
+    this.isLoading = false;
   }
 
   ngOnInit(): void {
@@ -76,9 +140,6 @@ export class ReportsComponent implements OnInit {
       const tipoventas = queryParams['tipoventas'];
       console.log('tipo:', tipoventas);
     });
-
-    this.generarChart();
-  
+    this.getOrders();
   }
-
 }

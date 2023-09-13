@@ -1,7 +1,40 @@
-.tu-div {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    box-sizing: border-box; 
-    height: 790px; width: 1480px; //ajustar despues
-  }
+.chart-container {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  box-sizing: border-box; 
+  height: 790px; width: 1480px; //ajustar despues
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.centered {
+    text-align: center;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
