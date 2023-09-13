@@ -118,6 +118,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     const firstDayFormatted = firstDayOfMonth;
     const lastDayFormatted = lastDayOfMonth;
 
+    this.startDate = firstDayOfMonth;
+    this.endDate = lastDayOfMonth;
+
     return `Desde ${firstDayFormatted} hasta ${lastDayFormatted}`;
   }
 
