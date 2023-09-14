@@ -15,9 +15,8 @@
     <button class="grouped-button" (click)="changeChartType('semana')">Ventas semanal</button>
     <button class="grouped-button" (click)="changeChartType('mes')">Ventas del mes</button>
     <button class="config-button" (click)="downloadAsPDF()">Descargar como PDF</button>
-
-    <button class="config-button" (click)="downloadAsPDF()">Configurar Gráfico</button>
-
+    
+    <button class="config-button" (click)="openDialogNew()">Configurar Gráfico</button>
     <canvas #myChart ></canvas>
 </div>
 

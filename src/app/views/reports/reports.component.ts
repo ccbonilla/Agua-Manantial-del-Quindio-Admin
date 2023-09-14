@@ -6,6 +6,8 @@ import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { Chart, registerables, Colors } from 'chart.js';
 import Swal from 'sweetalert2';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
+import { DialogConfigChartComponent } from './dialog-conf-chart/dialog-config-chart.component';
 
 Chart.register(...registerables);
 Chart.register(Colors);
@@ -28,7 +30,21 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   isLoading: boolean = true;
   isChartJsInitialized: boolean = false;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService) {}
+  constructor(private route: ActivatedRoute, private orderService: OrderService, public dialog: MatDialog) {}
+
+  openDialogNew() {
+    const position: DialogPosition = {
+      left: '30%',
+      top: '-600px',
+    };
+    const dialogRef = this.dialog.open(DialogConfigChartComponent, {
+      height: '400px',
+      width: '630px',
+      position: position,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+    });
+  }
 
   public changeChartType(newChartType: string): void {
     this.isLoading = true;
@@ -47,18 +63,6 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     }
 
     this.getOrdersAndFilter(); // Vuelve a consultar los order y generar el gráfico
-  }
-
-  selectedButton: string = 'button1'; // Establece el botón seleccionado por defecto
-  areButtonsVisible: boolean = false; // Controla la visibilidad de los botones
-
-  toggleButtons() {
-    this.areButtonsVisible = !this.areButtonsVisible;
-  }
-
-  selectButton(buttonId: string) {
-    this.selectedButton = buttonId;
-    this.toggleButtons(); // Oculta los botones después de seleccionar uno
   }
 
   ngAfterViewInit() {
@@ -198,3 +202,4 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     
   }
 }
+

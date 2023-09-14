@@ -48,6 +48,7 @@ import { CreateProductComponent } from './views/products/create-product/create-p
 import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
 import { CustomerReviewComponent } from './views/customers/customer-review/customer-review.component';
 import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
+import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/dialog-config-chart.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { DetailOrderComponent } from './views/orders/detail-order/detail-order.c
     CreateCustomerComponent,
     CustomerReviewComponent,
     DetailOrderComponent,
+    DialogConfigChartComponent,
   ],
   imports: [
     BrowserModule,
