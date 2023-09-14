@@ -32,9 +32,59 @@
     text-align: center;
 }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 100%;
-  margin: auto;
+.vertical-buttons {
+  display: flex;
+  flex-direction: column; /* Alinea los botones verticalmente */
+  align-items: flex-start; /* Alinea los botones a la izquierda */
+  gap: 10px; /* Espacio entre botones */
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 3px;
+}
+
+button.selected {
+  background-color: #28a745; /* Cambia el color de fondo del botón seleccionado */
+}
+
+.grouped-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+/* Estilo para el botón seleccionado */
+.grouped-button.selected {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Estilo para los botones no seleccionados */
+.grouped-button:not(.selected) {
+  background-color: #eaeaea;
+  color: #333;
+}
+
+.grouped-button:hover:not(.selected) {
+  background-color: #ccc;
+}
+
+.config-button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #0d6efd;
   text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
 }

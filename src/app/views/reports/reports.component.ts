@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { Chart, registerables, Colors } from 'chart.js';
+import Swal from 'sweetalert2';
 
 Chart.register(...registerables);
 Chart.register(Colors);
@@ -44,6 +47,18 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     }
 
     this.getOrdersAndFilter(); // Vuelve a consultar los order y generar el gráfico
+  }
+
+  selectedButton: string = 'button1'; // Establece el botón seleccionado por defecto
+  areButtonsVisible: boolean = false; // Controla la visibilidad de los botones
+
+  toggleButtons() {
+    this.areButtonsVisible = !this.areButtonsVisible;
+  }
+
+  selectButton(buttonId: string) {
+    this.selectedButton = buttonId;
+    this.toggleButtons(); // Oculta los botones después de seleccionar uno
   }
 
   ngAfterViewInit() {
@@ -156,6 +171,23 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     
     this.isLoading = false;
   }
+  
+  downloadAsPDF() {
+    // Captura el elemento del gráfico como una imagen
+    html2canvas(this.myChartCanvas.nativeElement).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('landscape');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth - 20, pdfHeight - 20);
+      pdf.save('grafico.pdf');
+
+      Swal.fire('Exitoso', 'Archivo descargado', 'success');
+    });
+  }
+
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams) => {

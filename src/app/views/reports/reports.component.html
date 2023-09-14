@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <div class="centered">
-    <h1>Gráfico de Ventas</h1>
+    <h1 style="margin-bottom: 50px; margin-top: 10px;">Gráfico de Ventas</h1>
 </div>
 <div *ngIf="isLoading">
     <div class="loading-container">
@@ -10,10 +10,14 @@
 </div>
 
 <div class="chart-container">
-    <button (click)="changeChartType('dia')">Ventas del día</button>
-    <button (click)="changeChartType('semana')">Ventas semanal</button>
-    <button (click)="changeChartType('mes')">Ventas del mes</button>
-    
+
+    <button class="grouped-button" (click)="changeChartType('dia')">Ventas del día</button>
+    <button class="grouped-button" (click)="changeChartType('semana')">Ventas semanal</button>
+    <button class="grouped-button" (click)="changeChartType('mes')">Ventas del mes</button>
+    <button class="config-button" (click)="downloadAsPDF()">Descargar como PDF</button>
+
+    <button class="config-button" (click)="downloadAsPDF()">Configurar Gráfico</button>
+
     <canvas #myChart ></canvas>
 </div>
 
