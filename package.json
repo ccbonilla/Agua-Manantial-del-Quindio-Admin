@@ -24,6 +24,8 @@
     "angular-web-storage": "^15.0.0",
     "bootstrap-icons": "^1.10.3",
     "chart.js": "^4.4.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "ng2-charts": "^4.1.1",
     "ngx-bootstrap": "^10.2.0",
     "rxjs": "~7.5.0",

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { Chart, registerables, Colors } from 'chart.js';
+
 Chart.register(...registerables);
 Chart.register(Colors);
 
@@ -23,13 +24,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   labels: string[] = [];
   isLoading: boolean = true;
   isChartJsInitialized: boolean = false;
-  public currentChartType = 'bar';
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) {}
 
   public changeChartType(newChartType: string): void {
     this.isLoading = true;
-    this.currentChartType = newChartType;
 
     this.orders = [];
     this.labels= [];
@@ -47,22 +46,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.getOrdersAndFilter(); // Vuelve a consultar los order y generar el gráfico
   }
 
-  actualizarChart() {
-    // Resto del código de configuración del gráfico
-  
-    //const chartType = this.myChartCanvas.nativeElement;
-
-    //this.myCanvas.nativeElement;
-    //
-    //var myChart;
-
-    //this.getOrders();
-  
-    this.isLoading = false;
-  }
-
   ngAfterViewInit() {
-    // En ngAfterViewInit, myChartCanvas estará disponible.
     this.getOrdersAndFilter();
   }
   
@@ -80,14 +64,12 @@ export class ReportsComponent implements OnInit, AfterViewInit {
         if( stringStartDate <= order.order_date && stringEndDate >= order.order_date ){
           console.log('match '+JSON.stringify(order));
           this.orders.push(order); 
-          this.labels.push(order.order_date);
+          this.labels.push(order.order_date + '\n'+order.customer_name);
           this.data.push(order.value);
         }
       });
       this.generarChart();
     });
-    //const semana = this.getWeekRange();
-    //console.log(semana);
   }
 
   getWeekRange() {
@@ -127,10 +109,8 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   generarChart() {
     //condicional permite conocer si es actualizacion o se creara el canvas por primera vez
     if (this.isChartJsInitialized) {
-      
       this.chart.data.labels = this.labels;
       this.chart.data.datasets[0].data = this.data;
-      //this.chart.data.datasets[1].data = this.orderProducts.axisX_sumTotal;
       this.chart.update();
       this.isLoading = false;
       return;

@@ -20,6 +20,7 @@ export class Order {
     count: 0,
     user_type_name: '',
   };
+  customer_name: string = '';
   products: ProductOrder[] = [];
   details: ProductOrder[] = [];
 }
