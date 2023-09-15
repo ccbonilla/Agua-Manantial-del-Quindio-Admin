@@ -24,6 +24,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 import { NgChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
@@ -95,6 +97,8 @@ import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/di
     MatCardModule,
     MatButtonToggleModule,
     MatSidenavModule,
+    MatCheckboxModule,
+    MatButtonModule,
     MatDividerModule,
     FlexLayoutModule,
     NgChartsModule,

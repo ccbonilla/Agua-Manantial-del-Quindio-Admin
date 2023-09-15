@@ -4,6 +4,36 @@
     background-color: aqua;
     justify-content: center;
   }
+
+  .example-container mat-form-field + mat-form-field {
+    margin-left: 8px;
+  }
+
+
+  /* styles.css o el archivo de estilo de tu componente */
+
+
+
+/* Estilos adicionales según tu preferencia */
+.mat-datepicker-content .mat-calendar {
+  width: 296px;
+  height: 354px;
+  background-color: #c51515;
+}
+
+.mat-datepicker-header {
+  background-color: #f0f0f0; /* Color de fondo del encabezado */
+  color: #333; /* Color de texto */
+}
+
+.mat-calendar {
+  font-size: 14px; /* Tamaño de fuente del calendario */
+}
+
+.mat-calendar-body-cell-content {
+  color: #333; /* Color de texto de las celdas */
+}
+
   
   .form {
     width: 600px;
@@ -42,3 +72,37 @@
     color: blue;
   }
   
+.swal2-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+}
+ 
+.field-form-element {
+  
+  width: 50%;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 30px;
+}
+
+.field-title-element {
+  padding-top: 20px;
+  width: 50%;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 30px;
+}
+
+.row-form-container {
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}

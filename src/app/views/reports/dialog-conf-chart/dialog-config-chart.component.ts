@@ -1,11 +1,7 @@
-
-
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/products/product.service';
 
 @Component({
   selector: 'app-dialog-config-chart',
@@ -14,13 +10,14 @@ import { ProductService } from 'src/app/services/products/product.service';
 })
 export class DialogConfigChartComponent implements OnInit {
   formGroup!: FormGroup;
-  productModel: Product = new Product();
+  selected: Date | null = new Date;
+  startDate = new Date();
+  checkBoxValid = true;
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService,
     private router: Router,
-    private dialogRef: MatDialogRef<DialogConfigChartComponent>
+    private dialogRef: MatDialogRef<DialogConfigChartComponent>,
   ) {}
 
   ngOnInit(): void {
@@ -28,13 +25,33 @@ export class DialogConfigChartComponent implements OnInit {
   }
   createForm() {
     this.formGroup = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      value: [null, [Validators.required]],
+      fechaInicial: ['', Validators.required],
+      fechaFinal: ['', Validators.required],
+      pedido: [false],
+      cliente: [false],
+      fecha: [true],
     });
   }
 
+  checkboxChanged(checkboxName: string) {
+
+    const { pedido, cliente, fecha } = this.formGroup.value;
+
+      if (pedido || cliente || fecha) {
+        this.checkBoxValid = true;
+        console.log('un checkbox seleccionado '+this.checkBoxValid);
+      } else {
+        this.checkBoxValid = false;
+      }
+  }
+
   createOrder() {
-    console.log('ACEPTAR')
+    console.log('enter submit ' );
+    if (this.formGroup.valid) {
+      this.dialogRef.close(this.formGroup.value);
+      console.log('Formulario válido');
+    } else {
+      console.log('Formulario no válido');
+    }
   }
 }

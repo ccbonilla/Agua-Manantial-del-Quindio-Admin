@@ -29,6 +29,14 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   labels: string[] = [];
   isLoading: boolean = true;
   isChartJsInitialized: boolean = false;
+  
+  setUpChart: any = {
+    fechaFinal: '',
+    fechaInicial: '',
+    pedido: false,
+    cliente: false,
+    fecha: true,
+  };
 
   constructor(private route: ActivatedRoute, private orderService: OrderService, public dialog: MatDialog) {}
 
@@ -43,7 +51,27 @@ export class ReportsComponent implements OnInit, AfterViewInit {
       position: position,
     });
     dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        console.log(res);
+        this.setUpChart = res;
+        this.addSetUpChart();
+      } else {
+        console.log('res es null o vacío');
+      }
     });
+  }
+
+  addSetUpChart() {
+
+    this.isLoading = true;
+    this.orders = [];
+    this.labels= [];
+    this.data = [];
+
+    this.startDate = new Date(this.setUpChart.fechaInicial);
+    this.endDate =  new Date(this.setUpChart.fechaFinal);
+
+    this.getOrdersAndFilter(); // Vuelve a consultar los order y generar el gráfico
   }
 
   public changeChartType(newChartType: string): void {
@@ -69,6 +97,22 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.getOrdersAndFilter();
   }
   
+  getLabelsChart(order: any): any {
+
+    var labelChart = '';
+
+    if(this.setUpChart.pedido){
+      labelChart += 'pedido:'+order.order_id;
+    }
+    if(this.setUpChart.fecha){
+      labelChart += ' '+order.order_date;
+    }
+    if(this.setUpChart.cliente){
+      labelChart += ' '+order.customer_name;
+    }
+    return labelChart;
+  }
+
   getOrdersAndFilter() {
 
     console.log('start date '+this.startDate);
@@ -83,8 +127,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
         if( stringStartDate <= order.order_date && stringEndDate >= order.order_date ){
           console.log('match '+JSON.stringify(order));
           this.orders.push(order); 
-          this.labels.push(order.order_date + '\n'+order.customer_name);
           this.data.push(order.value);
+          //labels
+          this.labels.push(this.getLabelsChart(order));
         }
       });
       this.generarChart();
@@ -146,9 +191,13 @@ export class ReportsComponent implements OnInit, AfterViewInit {
       return rgbaColor;
     }
 
-    const backgroundColor = this.labels.map(() => getRandomHexColor());
-    const borderColor = backgroundColor;
-
+    if (this.labels && this.labels.length > 0) {
+      var backgroundColor = this.labels.map(() => getRandomHexColor());
+      var borderColor = backgroundColor;
+    } else {
+      backgroundColor = ['rgba(54, 162, 235, 0.2)'];
+      borderColor = backgroundColor;
+    }
     // Configuración del gráfico
     const canvas = this.myChartCanvas.nativeElement;
 
@@ -157,7 +206,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
       data: {
           labels: this.labels,
           datasets: [{
-              label: 'ventas de día',
+              label: 'ventas del día',
               data: this.data,
               backgroundColor: backgroundColor,
               borderColor: borderColor,
