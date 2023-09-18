@@ -7,15 +7,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MatDialog, DialogPosition } from '@angular/material/dialog';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
-import { OrderReviewComponent } from './modal/order-review/order-review.component';
-import { CreateOrderComponent } from './modal/create-order/create-order.component';
 import { Router } from '@angular/router';
 import { DetailOrderComponent } from './detail-order/detail-order.component';
+import { CreateOrderComponent } from './modal/create-order/create-order.component';
 
 @Component({
   selector: 'app-orders',
@@ -68,15 +66,19 @@ export class OrdersComponent implements OnInit {
       this.orders = orders.filter(
         (order) => order.order_state != 3 && order.order_state != 4
       );
+
       this.dataSource = new MatTableDataSource(this.orders);
     });
   }
-  openDialog(order: Order) {
-    this.router.navigate(['reviewOrder', JSON.stringify(order)], {
-      state: {
-        customer: order.customer,
-        products: order.products,
-      },
+  openDialogOrderReview(order: Order) {
+    const dialogRef = this.dialog.open(DetailOrderComponent, {
+      data: order,
+      height: '500px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getOrders();
     });
   }
 

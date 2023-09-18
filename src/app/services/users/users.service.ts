@@ -16,6 +16,13 @@ export class UserService {
       .get(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response as User[]));
   }
+
+  getUserById(url: string): Observable<User> {
+    return this.http
+      .get(`${this.BASE_URL}/${url}`)
+      .pipe(map((response) => response as User));
+  }
+
   delete(url: string): Observable<any> {
     return this.http
       .delete(`${this.BASE_URL}/${url}`)

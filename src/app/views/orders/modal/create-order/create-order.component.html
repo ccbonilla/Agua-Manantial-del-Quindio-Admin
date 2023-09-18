@@ -131,17 +131,9 @@
           </div>
         </form>
       </mat-expansion-panel>
-      <button
-        mat-button
-        (click)="createOrder()"
-        cdkFocusInitial
-        *ngIf="productsModel.length > 0"
-        class="float"
-      >
-        Guardar Pedido
-      </button>
     </mat-accordion>
   </div>
+  <!-- cdkFocusInitial -->
   <mat-divider [vertical]="true" class="divider"></mat-divider>
   <div fxFlex="50%">
     <div class="header">
@@ -209,8 +201,26 @@
       ></tr>
     </mat-table>
     <h4>Total Pedido : {{ getTotalValues() }}</h4>
+    <br />
+
+    <div>
+      <button
+        mat-fab
+        extended
+        color="primary"
+        style="position: fixed"
+        (click)="createOrder()"
+        *ngIf="productsModel.length > 0"
+      >
+        <mat-icon>add_shopping_cart</mat-icon>
+        Guardar Pedido
+      </button>
+    </div>
   </div>
 </div>
+
+<!-- mat-button -->
+
 <!-- <ul>
       <li *ngFor="let product of productsModel">
         {{ product.product_id }} - Cantidad: {{ product.product_cant }}

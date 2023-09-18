@@ -1,5 +1,156 @@
-<app-nav-bar></app-nav-bar>
-<div class="container">
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <div fxLayout="column">
+      <div class="header">
+        <h1>Revisar y/o modificar pedido {{ order.order_id }}</h1>
+      </div>
+      <br />
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Datos del Cliente ​👤​ 
+          </mat-expansion-panel-header>
+          <form [formGroup]="customerFormGroup" class="form">
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Nombre"
+                formControlName="name"
+                [(ngModel)]="order.customer.name"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Apellidos"
+                formControlName="lastname"
+                [(ngModel)]="order.customer.lastname"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Correo"
+                formControlName="email"
+                [(ngModel)]="order.customer.email"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                formControlName="address"
+                [(ngModel)]="order.customer.address"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Teléfono"
+                formControlName="phone"
+                [(ngModel)]="order.customer.phone"
+              />
+            </mat-form-field>
+          </form>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Datos de la Orden ​⚙️​
+          </mat-expansion-panel-header>
+          <form [formGroup]="orderFormGroup">
+            <mat-form-field class="mat-form">
+              <mat-label>Fecha de entrega</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker1"
+                formControlName="order_date"
+                [(ngModel)]="order.order_date"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Valor del pedido</mat-label>
+              <input
+                matInput
+                formControlName="value"
+                type="number"
+                [(ngModel)]="order.value"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Descuento otorgado</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="Descuento"
+                formControlName="discount"
+                [(ngModel)]="order.discount"
+              />
+            </mat-form-field>
+          </form>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.product_id }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Nombre Producto
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.product_name }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="cant">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Cantidad
+                </th>
+                <td mat-cell *matCellDef="let row" class="cantidad-cell">
+                  <button mat-icon-button (click)="addCant(row)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  <span class="cantidad-number">{{ row.product_cant }}</span>
+                  <button mat-icon-button (click)="removeCant(row)">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="titles"></tr>
+              <tr mat-row *matRowDef="let row; columns: titles"></tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[10, 25, 100]"
+              aria-label="Select page of users"
+            ></mat-paginator>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="updateOrder()"
+  >
+    Guardar Cambios
+  </button>
+</mat-dialog-actions>
+
+<!-- <div class="container">
   <div class="header">
     <h1>Pedido # {{ order.order_id }}</h1>
   </div>
@@ -44,4 +195,4 @@
       </button>
     </div>
   </div>
-</div>
+</div> -->
