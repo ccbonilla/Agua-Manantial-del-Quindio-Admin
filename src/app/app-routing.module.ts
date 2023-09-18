@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'info', component: InfoComponent },
   { path: 'createOrder/:customer_id', component: CreateOrderComponent },
-  { path: 'reviewOrder/:order', component: DetailOrderComponent },
+  { path: 'reviewOrder/:order_id', component: DetailOrderComponent },
 ];
 
 @NgModule({
