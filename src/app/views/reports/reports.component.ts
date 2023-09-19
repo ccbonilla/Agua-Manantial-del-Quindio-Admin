@@ -40,16 +40,14 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private orderService: OrderService, public dialog: MatDialog) {}
 
+  
   openDialogNew() {
-    const position: DialogPosition = {
-      left: '30%',
-      top: '-600px',
-    };
+    console.log('opne dialog2');
     const dialogRef = this.dialog.open(DialogConfigChartComponent, {
-      height: '400px',
+      height: '420px',
       width: '630px',
-      position: position,
     });
+
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         console.log(res);
@@ -60,6 +58,28 @@ export class ReportsComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  //openDialogNew() {
+  //  console.log('opne dialog');
+  //  const position: DialogPosition = {
+  //    left: '30%',
+  //    top: '-600px',
+  //  };
+  //  const dialogRef = this.dialog.open(DialogConfigChartComponent, {
+  //    height: '400px',
+  //    width: '630px',
+  //    position: position,
+  //  });
+  //  dialogRef.afterClosed().subscribe((res) => {
+  //    if (res) {
+  //      console.log(res);
+  //      this.setUpChart = res;
+  //      this.addSetUpChart();
+  //    } else {
+  //      console.log('res es null o vacío');
+  //    }
+  //  });
+  //}
 
   addSetUpChart() {
 

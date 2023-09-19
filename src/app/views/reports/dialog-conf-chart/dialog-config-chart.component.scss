@@ -1,4 +1,4 @@
-.container {
+.containerXD {
     width: 400px;
     height: 400px;
     background-color: aqua;
@@ -9,12 +9,15 @@
     margin-left: 8px;
   }
 
-
-  /* styles.css o el archivo de estilo de tu componente */
-
-
-
-/* Estilos adicionales según tu preferencia */
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .mat-form {
+    width: 50%;
+  }
 .mat-datepicker-content .mat-calendar {
   width: 296px;
   height: 354px;
@@ -22,16 +25,16 @@
 }
 
 .mat-datepicker-header {
-  background-color: #f0f0f0; /* Color de fondo del encabezado */
-  color: #333; /* Color de texto */
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 .mat-calendar {
-  font-size: 14px; /* Tamaño de fuente del calendario */
+  font-size: 14px;
 }
 
 .mat-calendar-body-cell-content {
-  color: #333; /* Color de texto de las celdas */
+  color: #333;
 }
 
   
