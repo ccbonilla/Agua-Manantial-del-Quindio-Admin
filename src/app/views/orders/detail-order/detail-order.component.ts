@@ -1,18 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Order } from 'src/app/models/order';
 import { MatTableDataSource } from '@angular/material/table';
 import { OrderService } from 'src/app/services/orders/orders.service';
 import { UserService } from 'src/app/services/users/users.service';
 import { ProductOrder } from 'src/app/models/product_order';
-import { User } from 'src/app/models/user';
+import { OrderState } from 'src/app/models/order_state';
+import { userType } from 'src/app/models/user_type';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,17 +17,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./detail-order.component.scss'],
 })
 export class DetailOrderComponent implements OnInit {
-  // order: Order = new Order();
-  // user: User = new User();
-  // productList: ProductOrder[] = [];
   dataSource: MatTableDataSource<ProductOrder>;
   titles: string[] = ['id', 'name', 'cant'];
   customerFormGroup!: FormGroup;
   orderFormGroup!: FormGroup;
   formData = new FormData();
+  orderStateslist: OrderState[] = [];
+  userTypesList: userType[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
     private userService: UserService,
@@ -42,6 +36,8 @@ export class DetailOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getOrderStates();
+    this.getUserTypes();
     this.createForm();
   }
   createForm() {
@@ -51,11 +47,13 @@ export class DetailOrderComponent implements OnInit {
       email: [null, [Validators.required]],
       phone: [null, [Validators.required]],
       address: [null, [Validators.required]],
+      user_type: [null, [Validators.required]],
     });
     this.orderFormGroup = this.formBuilder.group({
       order_date: [null, [Validators.required]],
       value: [null, [Validators.required]],
       discount: [null, [Validators.required]],
+      state: [null, [Validators.required]],
       products: [null, [Validators.required]],
     });
   }
@@ -109,10 +107,14 @@ export class DetailOrderComponent implements OnInit {
         this.order = sub;
       });
   }
-  // getUser(user_id: number) {
-  //   this.userService.getUserById(`find-by-id/${user_id}`).subscribe((sub) => {
-  //     this.user = sub;
-  //     console.log('user', this.user);
-  //   });
-  // }
+  getOrderStates() {
+    this.orderService.getStates('list-order-states').subscribe((sub) => {
+      this.orderStateslist = sub;
+    });
+  }
+  getUserTypes() {
+    this.userService.getUserTypes('list').subscribe((sub) => {
+      this.userTypesList = sub;
+    });
+  }
 }

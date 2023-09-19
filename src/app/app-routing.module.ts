@@ -8,8 +8,8 @@ import { CustomersComponent } from './views/customers/customers.component';
 import { ReportsComponent } from './views/reports/reports.component';
 import { InfoComponent } from './views/info/info.component';
 import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
-import { OrderReviewComponent } from './views/orders/modal/order-review/order-review.component';
 import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
+import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'customers', component: CustomersComponent },
+  { path: 'createCustomer', component: CreateCustomerComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'info', component: InfoComponent },
   { path: 'createOrder/:customer_id', component: CreateOrderComponent },

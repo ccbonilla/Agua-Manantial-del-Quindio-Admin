@@ -1,29 +1,51 @@
 <app-nav-bar></app-nav-bar>
-<div class="container">
-  <mat-label>Quiénes somos</mat-label>
-  <mat-form-field>
-    <textarea matInput [(ngModel)]="aboutUs"></textarea>
-  </mat-form-field>
-  <mat-label>Visión</mat-label>
-  <mat-form-field>
-    <textarea matInput [(ngModel)]="vision"></textarea>
-  </mat-form-field>
-  <mat-label>Misión</mat-label>
-  <mat-form-field>
-    <textarea matInput [(ngModel)]="mision"></textarea>
-  </mat-form-field>
-  <mat-label>Teléfono</mat-label>
-  <mat-form-field>
-    <textarea matInput [(ngModel)]="phone"></textarea>
-  </mat-form-field>
-  <mat-label>Email</mat-label>
-  <mat-form-field>
-    <textarea matInput [(ngModel)]="email"></textarea>
-  </mat-form-field>
-  <button
-    class="btn btn-outline-dark text-white justify-content-between"
-    (click)="updateInfo()"
-  >
-    Enviar
-  </button>
+<div class="container" fxLayout="column">
+  <div class="header">
+    <h1>Información de agua manantial</h1>
+  </div>
+  <br />
+  <form [formGroup]="formGroup" class="form">
+    <mat-form-field class="mat-form">
+      <mat-label>Quiénes somos</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        [(ngModel)]="info.description"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="mat-form">
+      <mat-label>Visión</mat-label>
+      <textarea
+        matInput
+        formControlName="vision"
+        [(ngModel)]="info.vision"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="mat-form">
+      <mat-label>Misión</mat-label>
+      <textarea
+        matInput
+        formControlName="mision"
+        [(ngModel)]="info.mision"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="mat-form">
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="phone" [(ngModel)]="info.phone" />
+    </mat-form-field>
+    <mat-form-field class="mat-form">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [(ngModel)]="info.email" />
+    </mat-form-field>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        style="position: fixed"
+        (click)="updateInfo()"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
 </div>

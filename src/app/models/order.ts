@@ -19,6 +19,7 @@ export class Order {
     previous_user_type_id: 0,
     count: 0,
     user_type_name: '',
+    identification: '',
   };
   customer_name: string = '';
   products: ProductOrder[] = [];

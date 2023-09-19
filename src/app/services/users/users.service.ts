@@ -6,9 +6,11 @@ import { User } from '../../models/user';
 import { Auth } from 'src/app/models/auth';
 import { ResponseModel } from 'src/app/models/response.model';
 import { HttpService } from '../http/http.service';
+import { userType } from 'src/app/models/user_type';
 @Injectable()
 export class UserService {
   private BASE_URL: string = 'http://localhost:3000/user';
+  private BASE_URL_USER_TYPES: string = 'http://localhost:3000/user-type';
   constructor(private http: HttpClient) {}
 
   get(url: string): Observable<User[]> {
@@ -38,5 +40,21 @@ export class UserService {
       map((resp) => resp),
       catchError((err) => of(err.error.msg))
     );
+  }
+  getUserTypes(url: string): Observable<userType[]> {
+    return this.http
+      .get(`${this.BASE_URL_USER_TYPES}/${url}`)
+      .pipe(map((response) => response as userType[]));
+  }
+  updateUser(url: string, user: User): Observable<User> {
+    return this.http
+      .put(`${this.BASE_URL}/${url}`, user)
+      .pipe(map((response) => response as User));
+  }
+
+  createUser(url: string, user: User): Observable<User> {
+    return this.http
+      .post(`${this.BASE_URL}/${url}`, user)
+      .pipe(map((response) => response as User));
   }
 }

@@ -3,10 +3,13 @@ import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
 import { OrderService } from '../../services/orders/orders.service';
 import { CreateOrderComponent } from '../orders/modal/create-order/create-order.component';
-import { MatDialog, DialogPosition } from '@angular/material/dialog';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CustomerReviewComponent } from './customer-review/customer-review.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Order } from 'src/app/models/order';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
 
 @Component({
   selector: 'app-customers',
@@ -15,58 +18,56 @@ import { Router } from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
   titles = [
-    'Código Cliente',
+    'Id',
     'Nombre',
     'Correo',
-    'Dirección',
-    'Tipo de cliente',
-    'Compras acumuladas',
+    'Direccion',
+    'Compras',
+    'Eliminar',
+    'Pedido',
   ];
   customers: User[] = [];
   orderModelNew: Order = new Order();
-  // customers = [
-  //   {
-  //     id: 1,
-  //     name: 'Juan Gabriel',
-  //     lastname: 'Velasquez Blanco',
-  //     email: 'jvaguaenbotellon@outlook.com',
-  //     address: 'Villa Liliana Mz S casa 15',
-  //     type: 'Administrador',
-  //     count: 0,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'John William',
-  //     lastname: 'Reyes Garaviz',
-  //     email: 'johnwilliam_reyes@hotmail.com',
-  //     address: 'La Pavona Manzana G casa 16',
-  //     type: '5 x 1',
-  //     count: 5,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Cristian Camilo',
-  //     lastname: 'Bonilla Rincón',
-  //     email: 'ccbonillar@uqvirtual.edu.co',
-  //     address: 'Villa Hermosa Mz S casa 15',
-  //     type: '6 x 1',
-  //     count: 5,
-  //   },
-  // ];
+  dataSource: MatTableDataSource<User>;
   constructor(
     private userService: UserService,
     private orderService: OrderService,
     private dialog: MatDialog,
     private route: Router
-  ) {}
+  ) {
+    this.dataSource = new MatTableDataSource(this.customers);
+  }
 
   ngOnInit(): void {
     this.getUsers();
+  }
+  openDialogOrderReview(user: User) {
+    const dialogRef = this.dialog.open(CustomerReviewComponent, {
+      data: user,
+      height: '500px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getUsers();
+    });
   }
 
   getUsers() {
     this.userService.get('list').subscribe((users) => {
       this.customers = users;
+      this.dataSource = new MatTableDataSource(this.customers);
+    });
+  }
+
+  createCustomer() {
+    const dialogRef = this.dialog.open(CreateCustomerComponent, {
+      height: '500px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getUsers();
     });
   }
   createOrder(user_id: number) {
@@ -74,8 +75,21 @@ export class CustomersComponent implements OnInit {
   }
 
   deleteCustomer(user_id: number) {
-    this.userService.delete(`delete/${user_id}`).subscribe((resp) => {
-      this.getUsers();
+    Swal.fire({
+      title: '¡Hola!',
+      text: '¿Está seguro que desea eliminar éste cliente?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.delete(`delete/${user_id}`).subscribe((resp) => {
+          this.getUsers();
+        });
+      } else {
+        this.getUsers();
+      }
     });
   }
 }

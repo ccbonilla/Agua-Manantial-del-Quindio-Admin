@@ -1,9 +1,10 @@
 .chart-container {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 70%;
+  max-height: 70%;
   display: block;
-  box-sizing: border-box; 
-  height: 790px; width: 1480px; //ajustar despues
+  box-sizing: border-box;
+  height: 790px;
+  width: 1480px; //ajustar despues
 }
 
 .loading-container {
@@ -24,12 +25,16 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .centered {
-    text-align: center;
+  text-align: center;
 }
 
 .vertical-buttons {

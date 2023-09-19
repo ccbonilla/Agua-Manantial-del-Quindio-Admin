@@ -9,4 +9,5 @@ export class User {
   user_type_name: string = '';
   previous_user_type_id: number = 0;
   count: number = 0;
+  identification: string = '';
 }

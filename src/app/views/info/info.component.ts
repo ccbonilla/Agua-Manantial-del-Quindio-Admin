@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Info } from 'src/app/models/info';
 import { InfoService } from 'src/app/services/infoService/info.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-info',
@@ -9,38 +10,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./info.component.scss'],
 })
 export class InfoComponent implements OnInit {
-  aboutUs: string = '';
-  mision: string = '';
-  vision: string = '';
-  phone: string = '';
-  email: string = '';
-  description: string = '';
+  formGroup!: FormGroup;
+  formData = new FormData();
+  info: Info = new Info();
 
-  constructor(private infoService: InfoService, private router: Router) {}
+  constructor(
+    private infoService: InfoService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.getInfo();
+    this.createForm();
+  }
+
+  createForm() {
+    this.formGroup = this.formBuilder.group({
+      description: [null, [Validators.required]],
+      mision: [null, [Validators.required]],
+      vision: [null, [Validators.required]],
+      phone: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+    });
   }
 
   getInfo() {
     this.infoService.get('get-info/1').subscribe((info) => {
-      this.aboutUs = info.description;
-      this.mision = info.mision;
-      this.vision = info.vision;
-      this.phone = info.phone;
-      this.email = info.email;
+      console.log('info', info);
+
+      this.info = info;
     });
   }
 
   updateInfo() {
-    const infoModel: Info = {
-      mision: this.mision,
-      vision: this.vision,
-      phone: this.phone,
-      email: this.email,
-      description: this.aboutUs,
-    };
-    this.infoService.put('update/1', infoModel).subscribe((res) => {
+    this.infoService.put('update/1', this.info).subscribe((res) => {
       this.getInfo();
       this.router.navigate(['orders']);
     });
