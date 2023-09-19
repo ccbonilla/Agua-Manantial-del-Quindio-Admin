@@ -43,12 +43,26 @@
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
+              <mat-label>Teléfono</mat-label>
               <input
                 matInput
-                placeholder="Teléfono"
                 formControlName="phone"
                 [(ngModel)]="order.customer.phone"
               />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Tipo de cliente</mat-label>
+              <mat-select
+                formControlName="user_type"
+                [(ngModel)]="order.customer.user_type_id"
+              >
+                <mat-option
+                  *ngFor="let item of userTypesList"
+                  [value]="item.user_type_id"
+                >
+                  {{ item.description }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </form>
         </mat-expansion-panel>
@@ -92,6 +106,20 @@
                 formControlName="discount"
                 [(ngModel)]="order.discount"
               />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Status del pedido</mat-label>
+              <mat-select
+                formControlName="state"
+                [(ngModel)]="order.order_state"
+              >
+                <mat-option
+                  *ngFor="let item of orderStateslist"
+                  [value]="item.id_state"
+                >
+                  {{ item.name_state }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </form>
           <div class="mat-elevation-z8">
@@ -149,50 +177,3 @@
     Guardar Cambios
   </button>
 </mat-dialog-actions>
-
-<!-- <div class="container">
-  <div class="header">
-    <h1>Pedido # {{ order.order_id }}</h1>
-  </div>
-  <h3>Cliente : {{ order.customer.name }} {{ order.customer.lastname }}</h3>
-  <h3>Dirección : {{ order.customer.address }}</h3>
-  <h3>fecha de entrega : {{ order.order_date }}</h3>
-  <div class="table-container">
-    <mat-table mat-table [dataSource]="dataSource" matSort class="table">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          Id del producto
-        </th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.product_id }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          Nombre del producto
-        </th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.product_name }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="cant">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>cantidad</th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.product_cant }}
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="titles"></tr>
-      <tr mat-row *matRowDef="let row; columns: titles"></tr>
-    </mat-table>
-    <div>
-      <button
-        mat-button
-        cdkFocusInitial
-        class="button-rigth"
-        (click)="goToOrderList()"
-      >
-        Volver
-      </button>
-    </div>
-  </div>
-</div> -->

@@ -1,1 +1,81 @@
-<p>create-customer works!</p>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <div fxLayout="column">
+      <div class="header">
+        <h1>Crear Cliente</h1>
+      </div>
+      <br />
+      <form [formGroup]="customerFormGroup" class="form">
+        <mat-form-field class="mat-form">
+          <input
+            matInput
+            placeholder="Nombre"
+            formControlName="name"
+            [(ngModel)]="user.name"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <input
+            matInput
+            placeholder="Apellidos"
+            formControlName="lastname"
+            [(ngModel)]="user.lastname"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <input
+            matInput
+            placeholder="Identificación"
+            formControlName="identification"
+            [(ngModel)]="user.identification"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <input
+            matInput
+            placeholder="Correo"
+            formControlName="email"
+            [(ngModel)]="user.email"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <mat-label>Dirección</mat-label>
+          <input
+            matInput
+            formControlName="address"
+            [(ngModel)]="user.address"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="phone" [(ngModel)]="user.phone" />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <mat-label>Tipo de cliente</mat-label>
+          <mat-select
+            formControlName="user_type"
+            [(ngModel)]="user.user_type_id"
+          >
+            <mat-option
+              *ngFor="let item of userTypesList"
+              [value]="item.user_type_id"
+            >
+              {{ item.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="createUser()"
+  >
+    Guardar Cambios
+  </button>
+</mat-dialog-actions>

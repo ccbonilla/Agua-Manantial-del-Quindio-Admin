@@ -1,112 +1,60 @@
 <app-nav-bar></app-nav-bar>
-
-<!-- <div class="container">
-  <div class="row">
-    <div>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th *ngFor="let title of titles">{{ title }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders">
-            <td>
-              {{ order.order_id }}
-            </td>
-            <td>
-              {{ order.order_date }}
-            </td>
-            <td>{{ order.customer.name }} {{ order.customer.lastname }}</td>
-            <td>{{ order.customer.address }}</td>
-            <td>
-              {{ order.value }}
-            </td>
-
-            <td>
-              <a (click)="openDialog(order)"><i class="bi bi-eye-fill"></i></a>
-            </td>
-
-            <td>
-              <a (click)="changeState(order, 2)"
-                ><i class="bi bi-bicycle"></i
-              ></a>
-            </td>
-            <td>
-              <a (click)="changeState(order, 3)"
-                ><i class="bi bi-check2-all"></i
-              ></a>
-            </td>
-            <td>
-              <a (click)="deleteOrder(order)"><i class="bi bi-trash"></i></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="float" (click)="createOrder()">Crear Pedido</button>
-    </div>
-  </div>
-</div> -->
-
-<div class="container">
-  <div class="row">
-    <div>
-      <mat-table mat-table [dataSource]="dataSource" matSort class="table">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Id del producto
-          </th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.order_id }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Fecha_de_entrega">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Fecha de entrega
-          </th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.order_date }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Cliente">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.customer.name }} {{ row.customer.lastname }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Direccion">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.customer.address }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Valor">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Valor del pedido
-          </th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.value }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-          <td mat-cell *matCellDef="let row">
-            <a (click)="openDialogOrderReview(row)"
-              ><i class="bi bi-eye-fill"></i
-            ></a>
-            <a (click)="changeState(row, 2)"><i class="bi bi-bicycle"></i></a>
-            <a (click)="changeState(row, 3)"
-              ><i class="bi bi-check2-all"></i
-            ></a>
-            <a (click)="deleteOrder(row)"><i class="bi bi-trash"></i></a>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="titles"></tr>
-        <tr mat-row *matRowDef="let row; columns: titles"></tr>
-      </mat-table>
-    </div>
-    <div>
-      <button class="float" (click)="createOrder()">Crear Pedido</button>
-    </div>
-  </div>
+<br />
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id del producto</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.order_id }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Fecha_de_entrega">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Fecha de entrega
+      </th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.order_date }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Cliente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.customer.name }} {{ row.customer.lastname }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Direccion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.customer.address }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Valor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Valor del pedido con descuento
+      </th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.value }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon (click)="deleteOrder(row)">delete</mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="titles"></tr>
+    <tr mat-row *matRowDef="let row; columns: titles"></tr>
+  </table>
+</div>
+<br />
+<br />
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    style="position: fixed"
+    (click)="createOrder()"
+  >
+    Crear Pedido
+  </button>
 </div>

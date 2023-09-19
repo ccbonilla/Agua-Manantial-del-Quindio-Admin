@@ -3,3 +3,17 @@
   width: 250px;
   padding-right: 50px;
 }
+
+.mat-toolbar {
+  // background-color: rgba(0, 0, 255, 0.868);
+  // background: linear-gradient(to right, #03a9f4 0%, #330867 100%);
+  background: linear-gradient(to right, #330867 0%, #03a9f4 100%);
+  color: white;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.navBar {
+  height: 110px;
+}

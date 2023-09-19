@@ -1,32 +1,9 @@
 .container {
   width: 800px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 500px;
   margin-top: 10px;
-  border: 5px solid black;
-}
-mat-form-field {
-  width: 100%;
 }
 
-mat-form-field textarea {
-  margin-top: 10px;
-  resize: vertical;
-  overflow: auto;
-  height: auto;
-}
-button {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  height: 50px;
-  width: 200px;
-  margin-bottom: 20px;
-}
-mat-label {
-  color: #007bff;
-  font-size: 20px;
+.mat-form {
+  width: 90%;
 }

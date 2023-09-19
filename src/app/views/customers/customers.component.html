@@ -1,52 +1,64 @@
 <app-nav-bar></app-nav-bar>
-<div class="container">
-  <div class="row">
-    <div>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th *ngFor="let title of titles">{{ title }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let customer of customers">
-            <td>
-              {{ customer.user_id }}
-            </td>
-            <td>{{ customer.name }} {{ customer.lastname }}</td>
-            <td>
-              {{ customer.email }}
-            </td>
-            <td>
-              {{ customer.address }}
-            </td>
-            <td>
-              {{ customer.user_type_name }}
-            </td>
-            <td>{{ customer.count }}</td>
-            <td>
-              <a
-                ><i
-                  class="bi bi-cart-plus-fill"
-                  (click)="createOrder(customer.user_id)"
-                ></i
-              ></a>
-            </td>
-            <td>
-              <a
-                ><i
-                  class="bi bi-trash"
-                  (click)="deleteCustomer(customer.user_id)"
-                ></i
-              ></a>
-            </td>
-            <td>
-              <a><i class="bi bi-pencil" (click)="getUsers()"></i></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="float">Crear cliente</button>
-    </div>
-  </div>
+<br />
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id del cliente</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.user_id }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.name }} {{ row.lastname }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Correo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.email }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Direccion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.address }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Compras">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Cantidad de botellones acumulados
+      </th>
+      <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
+        {{ row.count }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Pedido" class="form-field">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon (click)="createOrder(row.user_id)">shopping_cart</mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Eliminar" class="form-field">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon (click)="deleteCustomer(row)">delete</mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="titles"></tr>
+    <tr mat-row *matRowDef="let row; columns: titles"></tr>
+  </table>
+</div>
+<br />
+<br />
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    style="position: fixed"
+    (click)="createCustomer()"
+  >
+    Crear Cliente
+  </button>
 </div>
