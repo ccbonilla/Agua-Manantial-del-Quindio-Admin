@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/products/product.service';
 import { ProductReviewComponent } from './product-review/product-review.component';
 import { Product } from '../../models/product';
-import { MatDialog, DialogPosition } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-products',
@@ -12,49 +14,42 @@ import { CreateProductComponent } from './create-product/create-product.componen
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  titles = ['Código Producto', 'Nombre', 'Descripción', 'Valor'];
+  titles = ['Id', 'Nombre', 'Descripcion', 'Valor', 'Eliminar'];
   products: Product[] = [];
+  dataSource: MatTableDataSource<Product>;
 
   constructor(
     private productService: ProductService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private router: Router
+  ) {
+    this.dataSource = new MatTableDataSource(this.products);
+  }
 
   ngOnInit(): void {
     this.getProducts();
   }
 
-  logOut() {}
-
   getProducts() {
     this.productService.get('list').subscribe((prods) => {
       this.products = prods;
+      this.dataSource = new MatTableDataSource(this.products);
     });
   }
-  openDialog(itemSelected: Product) {
-    const position: DialogPosition = {
-      left: '30%',
-      top: '-220px',
-    };
+  reviewProduct(product: Product) {
     const dialogRef = this.dialog.open(ProductReviewComponent, {
-      height: '400px',
-      width: '630px',
-      position: position,
-      data: itemSelected,
+      data: product,
+      height: '350px',
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe((res) => {
       this.getProducts();
     });
   }
-  openDialogNew() {
-    const position: DialogPosition = {
-      left: '30%',
-      top: '-220px',
-    };
+  createProduct() {
     const dialogRef = this.dialog.open(CreateProductComponent, {
-      height: '400px',
-      width: '630px',
-      position: position,
+      height: '350px',
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe((res) => {
       this.getProducts();
@@ -79,5 +74,13 @@ export class ProductsComponent implements OnInit {
         this.getProducts();
       }
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

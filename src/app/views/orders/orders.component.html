@@ -1,5 +1,15 @@
 <app-nav-bar></app-nav-bar>
 <br />
+<mat-form-field class="mat-form">
+  <mat-label>Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ingrese el dato a filtrar"
+    #input
+  />
+</mat-form-field>
+<br />
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">

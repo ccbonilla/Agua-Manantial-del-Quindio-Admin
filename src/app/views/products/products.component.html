@@ -1,5 +1,66 @@
 <app-nav-bar></app-nav-bar>
-<div class="container">
+<br />
+<mat-form-field class="mat-form">
+  <mat-label>Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ingrese el dato a filtrar"
+    #input
+  />
+</mat-form-field>
+<br />
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id del producto</th>
+      <td mat-cell *matCellDef="let row" (click)="reviewProduct(row)">
+        {{ row.product_id }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let row" (click)="reviewProduct(row)">
+        {{ row.name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+      <td mat-cell *matCellDef="let row" (click)="reviewProduct(row)">
+        {{ row.description }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Valor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
+      <td mat-cell *matCellDef="let row" (click)="reviewProduct(row)">
+        {{ row.value }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Eliminar" class="form-field">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon (click)="deleteProduct(row)">delete</mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="titles"></tr>
+    <tr mat-row *matRowDef="let row; columns: titles"></tr>
+  </table>
+</div>
+<br />
+<br />
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    style="position: fixed"
+    (click)="createProduct()"
+  >
+    Crear Producto
+  </button>
+</div>
+
+<!-- <div class="container">
   <div class="row">
     <div>
       <table class="table table-striped table-bordered">
@@ -38,4 +99,4 @@
       <button class="float" (click)="openDialogNew()">Crear Producto</button>
     </div>
   </div>
-</div>
+</div> -->
