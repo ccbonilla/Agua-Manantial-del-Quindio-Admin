@@ -1,25 +1,28 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/products/product.service';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-product-review',
   templateUrl: './product-review.component.html',
   styleUrls: ['./product-review.component.scss'],
 })
-export class ProductReviewComponent {
+export class ProductReviewComponent implements OnInit {
   formGroup!: FormGroup;
+  formData = new FormData();
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: Product
   ) {}
 
   ngOnInit(): void {
+    console.log('data', this.data);
     this.createForm();
   }
   createForm() {
