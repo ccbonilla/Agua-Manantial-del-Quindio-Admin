@@ -20,6 +20,9 @@ export class Order {
     count: 0,
     user_type_name: '',
     identification: '',
+    lat: 0,
+    lon: 0,
+    ticket: false,
   };
   customer_name: string = '';
   products: ProductOrder[] = [];

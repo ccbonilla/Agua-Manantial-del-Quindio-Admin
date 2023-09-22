@@ -10,4 +10,7 @@ export class User {
   previous_user_type_id: number = 0;
   count: number = 0;
   identification: string = '';
+  lat?: number = 0;
+  lon?: number = 0;
+  ticket: boolean = false;
 }

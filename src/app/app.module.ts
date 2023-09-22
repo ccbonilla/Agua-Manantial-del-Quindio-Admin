@@ -28,6 +28,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { NgChartsModule } from 'ng2-charts';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {
+  GoogleMapsModule,
+  GoogleMap,
+  MapInfoWindow,
+} from '@angular/google-maps';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -104,6 +110,8 @@ import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/di
     FlexLayoutModule,
     NgChartsModule,
     MatToolbarModule,
+    GoogleMapsModule,
+    MatRadioModule,
   ],
   providers: [
     ProductService,
@@ -111,6 +119,7 @@ import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/di
     UserService,
     BsModalService,
     InfoService,
+    GoogleMap,
   ],
   bootstrap: [AppComponent],
 })

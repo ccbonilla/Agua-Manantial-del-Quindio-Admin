@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -24,6 +30,9 @@ export class DetailOrderComponent implements OnInit {
   formData = new FormData();
   orderStateslist: OrderState[] = [];
   userTypesList: userType[] = [];
+  @ViewChild('inputFieldAddress')
+  private inputFieldAddress!: ElementRef;
+  autocompleteAddress: google.maps.places.Autocomplete | undefined;
 
   constructor(
     private router: Router,
@@ -40,6 +49,21 @@ export class DetailOrderComponent implements OnInit {
     this.getUserTypes();
     this.createForm();
   }
+  ngAfterViewInit() {
+    this.autocompleteAddress = new google.maps.places.Autocomplete(
+      this.inputFieldAddress.nativeElement
+    );
+    this.autocompleteAddress?.addListener('place_changed', () => {
+      this.order.customer.address = this.inputFieldAddress.nativeElement.value;
+
+      this.order.customer.lat = this.autocompleteAddress
+        ?.getPlace()
+        .geometry?.location?.lng();
+      this.order.customer.lon = this.autocompleteAddress
+        ?.getPlace()
+        .geometry?.location?.lat();
+    });
+  }
   createForm() {
     this.customerFormGroup = this.formBuilder.group({
       name: [null, [Validators.required]],
@@ -48,6 +72,7 @@ export class DetailOrderComponent implements OnInit {
       phone: [null, [Validators.required]],
       address: [null, [Validators.required]],
       user_type: [null, [Validators.required]],
+      ticket: [null, [Validators.required]],
     });
     this.orderFormGroup = this.formBuilder.group({
       order_date: [null, [Validators.required]],
