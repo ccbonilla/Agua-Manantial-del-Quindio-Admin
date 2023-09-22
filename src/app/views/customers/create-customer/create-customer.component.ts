@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -11,11 +17,14 @@ import Swal from 'sweetalert2';
   templateUrl: './create-customer.component.html',
   styleUrls: ['./create-customer.component.scss'],
 })
-export class CreateCustomerComponent {
+export class CreateCustomerComponent implements OnInit {
   customerFormGroup!: FormGroup;
   formData = new FormData();
   userTypesList: userType[] = [];
   user: User = new User();
+  @ViewChild('inputFieldAddress')
+  private inputFieldAddress!: ElementRef;
+  autocompleteAddress: google.maps.places.Autocomplete | undefined;
 
   constructor(
     private router: Router,
@@ -27,6 +36,22 @@ export class CreateCustomerComponent {
     this.getUserTypes();
     this.createForm();
   }
+
+  ngAfterViewInit() {
+    this.autocompleteAddress = new google.maps.places.Autocomplete(
+      this.inputFieldAddress.nativeElement
+    );
+    this.autocompleteAddress?.addListener('place_changed', () => {
+      this.user.address = this.inputFieldAddress.nativeElement.value;
+
+      this.user.lat = this.autocompleteAddress
+        ?.getPlace()
+        .geometry?.location?.lng();
+      this.user.lon = this.autocompleteAddress
+        ?.getPlace()
+        .geometry?.location?.lat();
+    });
+  }
   createForm() {
     this.customerFormGroup = this.formBuilder.group({
       name: [null, [Validators.required]],
@@ -36,6 +61,7 @@ export class CreateCustomerComponent {
       address: [null, [Validators.required]],
       user_type: [null, [Validators.required]],
       identification: [null, [Validators.required]],
+      ticket: [null, [Validators.required]],
     });
   }
   createUser() {

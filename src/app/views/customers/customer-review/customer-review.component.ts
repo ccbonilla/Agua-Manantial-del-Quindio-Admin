@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -16,6 +22,9 @@ export class CustomerReviewComponent implements OnInit {
   customerFormGroup!: FormGroup;
   formData = new FormData();
   userTypesList: userType[] = [];
+  @ViewChild('inputFieldAddress')
+  private inputFieldAddress!: ElementRef;
+  autocompleteAddress: google.maps.places.Autocomplete | undefined;
 
   constructor(
     private router: Router,
@@ -29,6 +38,22 @@ export class CustomerReviewComponent implements OnInit {
     this.createForm();
   }
 
+  ngAfterViewInit() {
+    this.autocompleteAddress = new google.maps.places.Autocomplete(
+      this.inputFieldAddress.nativeElement
+    );
+    this.autocompleteAddress?.addListener('place_changed', () => {
+      this.user.address = this.inputFieldAddress.nativeElement.value;
+
+      this.user.lat = this.autocompleteAddress
+        ?.getPlace()
+        .geometry?.location?.lng();
+      this.user.lon = this.autocompleteAddress
+        ?.getPlace()
+        .geometry?.location?.lat();
+    });
+  }
+
   createForm() {
     this.customerFormGroup = this.formBuilder.group({
       name: [null, [Validators.required]],
@@ -38,6 +63,7 @@ export class CustomerReviewComponent implements OnInit {
       address: [null, [Validators.required]],
       user_type: [null, [Validators.required]],
       identification: [null, [Validators.required]],
+      ticket: [null, [Validators.required]],
     });
   }
   updateUser() {

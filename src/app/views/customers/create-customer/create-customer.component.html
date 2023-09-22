@@ -42,6 +42,7 @@
           <mat-label>Dirección</mat-label>
           <input
             matInput
+            #inputFieldAddress
             formControlName="address"
             [(ngModel)]="user.address"
           />
@@ -62,6 +63,13 @@
             >
               {{ item.description }}
             </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <mat-label>Factura electrónica</mat-label>
+          <mat-select formControlName="ticket" [(ngModel)]="user.ticket">
+            <mat-option [value]="true">SI</mat-option>
+            <mat-option [value]="false">NO</mat-option>
           </mat-select>
         </mat-form-field>
       </form>
