@@ -47,13 +47,27 @@
     <ng-container matColumnDef="Pedido" class="form-field">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">
-        <mat-icon (click)="createOrder(row.user_id)">shopping_cart</mat-icon>
+        <mat-icon (click)="createOrder(row.user_id)" matTooltip="Crear pedido "
+          >shopping_cart</mat-icon
+        >
       </td>
     </ng-container>
     <ng-container matColumnDef="Eliminar" class="form-field">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">
-        <mat-icon (click)="deleteCustomer(row.user_id)">delete</mat-icon>
+        <mat-icon (click)="deleteCustomer(row.user_id)" matTooltip="Eliminar"
+          >delete</mat-icon
+        >
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Historial" class="form-field">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon
+          matTooltip="Historial de pedidos"
+          (click)="openDialogOrderHistory(row)"
+          >list</mat-icon
+        >
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="titles"></tr>

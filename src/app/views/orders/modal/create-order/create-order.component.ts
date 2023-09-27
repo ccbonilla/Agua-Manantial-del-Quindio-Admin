@@ -157,8 +157,6 @@ export class CreateOrderComponent implements OnInit {
       this.dataSourceUser.sort = this.sort;
       this.route.params.subscribe((params) => {
         if (params['customer_id'] != '0') {
-          console.log('parametro', params['customer_id']);
-
           this.orderModel.user_id = JSON.parse(params['customer_id']);
           this.orderModel.customer = this.userList.find(
             (user) => user.user_id == this.orderModel.user_id

@@ -41,6 +41,7 @@ export class OrdersComponent implements OnInit {
     'Acciones',
   ];
   orders: Order[] = [];
+  ordersGroup: Order[] = [];
 
   title = 'Pedidos';
   showModal = false;
@@ -60,15 +61,51 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.getOrders();
   }
-  logOut() {}
   getOrders() {
     this.orderService.get('list').subscribe((orders) => {
-      this.orders = orders.filter(
-        (order) => order.order_state != 3 && order.order_state != 4
-      );
-
-      this.dataSource = new MatTableDataSource(this.orders);
+      this.orders = orders;
+      this.selectOrdersGroup(0);
     });
+  }
+  selectOrdersGroup(index: number) {
+    if (index == 0) {
+      this.ordersGroup = this.orders.filter((order) => order.order_state == 1);
+      this.dataSource = new MatTableDataSource(this.ordersGroup);
+
+      if (this.ordersGroup.length === 0) {
+        Swal.fire({
+          title: 'No tienes pedidos pendientes por entregar!',
+          icon: 'warning',
+        });
+      }
+    } else if (index == 1) {
+      this.ordersGroup = this.orders.filter((order) => order.order_state == 2);
+      if (this.ordersGroup.length === 0) {
+        Swal.fire({
+          title: 'No tienes pedidos en ruta!',
+          icon: 'warning',
+        });
+      }
+      this.dataSource = new MatTableDataSource(this.ordersGroup);
+    } else if (index == 2) {
+      this.ordersGroup = this.orders.filter((order) => order.order_state == 3);
+      if (this.ordersGroup.length === 0) {
+        Swal.fire({
+          title: 'No tienes pedidos entregados!',
+          icon: 'warning',
+        });
+      }
+      this.dataSource = new MatTableDataSource(this.ordersGroup);
+    } else {
+      this.ordersGroup = this.orders.filter((order) => order.order_state == 4);
+      if (this.ordersGroup.length === 0) {
+        Swal.fire({
+          title: 'No tienes pedidos cancelados!',
+          icon: 'warning',
+        });
+      }
+    }
+    this.dataSource = new MatTableDataSource(this.ordersGroup);
   }
   openDialogOrderReview(order: Order) {
     const dialogRef = this.dialog.open(DetailOrderComponent, {

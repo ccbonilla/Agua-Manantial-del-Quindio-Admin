@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { HistoryComponent } from '../orders/history/history.component';
 
 @Component({
   selector: 'app-customers',
@@ -25,6 +26,7 @@ export class CustomersComponent implements OnInit {
     'Compras',
     'Eliminar',
     'Pedido',
+    'Historial',
   ];
   customers: User[] = [];
   orderModelNew: Order = new Order();
@@ -53,6 +55,17 @@ export class CustomersComponent implements OnInit {
     });
   }
 
+  openDialogOrderHistory(user: User) {
+    const dialogRef = this.dialog.open(HistoryComponent, {
+      data: user,
+      height: '500px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getUsers();
+    });
+  }
   getUsers() {
     this.userService.get('list').subscribe((users) => {
       this.customers = users;
