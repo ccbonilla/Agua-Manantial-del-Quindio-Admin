@@ -36,6 +36,7 @@ import {
 } from '@angular/google-maps';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -118,6 +119,7 @@ import { HistoryComponent } from './views/orders/history/history.component';
     MatRadioModule,
     MatTabsModule,
     MatTooltipModule,
+    MatMenuModule,
   ],
   providers: [
     ProductService,
