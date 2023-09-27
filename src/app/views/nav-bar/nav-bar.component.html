@@ -14,15 +14,26 @@
     >Reportes</a
   >
   <div class="spacer"></div>
-  <a mat-raised-button (click)="logOut()">Cerrar Sesión</a>
+  <!-- <a mat-raised-button (click)="logOut()">Cerrar Sesión</a> -->
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person_add</mat-icon>
+      <span>Crear Administrador</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>autorenew</mat-icon>
+      <span>Cambiar Contraseña</span>
+    </button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Cerrar Sesión</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
-
-<!-- <a class="dropdown-item" href="#" [routerLink]="['/reports']" [queryParams]="{ tipoventas: 'mes' }"
->Ventas del mes</a
->
-<a class="dropdown-item" href="#" [routerLink]="['/reports']" [queryParams]="{ tipoventas: 'semana' }"
->Ventas de la semana</a
->
-<a class="dropdown-item" href="#" [routerLink]="['/reports']" [queryParams]="{ tipoventas: 'dia' }"
->Ventas del día</a
-> -->
