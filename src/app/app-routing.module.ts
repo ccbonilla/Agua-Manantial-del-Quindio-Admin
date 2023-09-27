@@ -10,6 +10,7 @@ import { InfoComponent } from './views/info/info.component';
 import { CreateOrderComponent } from './views/orders/modal/create-order/create-order.component';
 import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
 import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
+import { HistoryComponent } from './views/orders/history/history.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'info', component: InfoComponent },
   { path: 'createOrder/:customer_id', component: CreateOrderComponent },
   { path: 'reviewOrder/:order_id', component: DetailOrderComponent },
+  { path: 'orderHistory/:customer_id', component: HistoryComponent },
 ];
 
 @NgModule({

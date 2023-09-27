@@ -28,12 +28,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { NgChartsModule } from 'ng2-charts';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   GoogleMapsModule,
   GoogleMap,
   MapInfoWindow,
 } from '@angular/google-maps';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -58,6 +60,7 @@ import { CreateCustomerComponent } from './views/customers/create-customer/creat
 import { CustomerReviewComponent } from './views/customers/customer-review/customer-review.component';
 import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
 import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/dialog-config-chart.component';
+import { HistoryComponent } from './views/orders/history/history.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,7 @@ import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/di
     CustomerReviewComponent,
     DetailOrderComponent,
     DialogConfigChartComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +116,8 @@ import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/di
     MatToolbarModule,
     GoogleMapsModule,
     MatRadioModule,
+    MatTabsModule,
+    MatTooltipModule,
   ],
   providers: [
     ProductService,
