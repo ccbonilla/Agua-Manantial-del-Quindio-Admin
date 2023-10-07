@@ -23,6 +23,7 @@ export class Order {
     lat: 0,
     lon: 0,
     ticket: false,
+    password: '',
   };
   customer_name: string = '';
   products: ProductOrder[] = [];

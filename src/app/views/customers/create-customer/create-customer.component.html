@@ -2,7 +2,7 @@
   <div class="container">
     <div fxLayout="column">
       <div class="header">
-        <h1>Crear Cliente</h1>
+        <h1>Crear Usuario</h1>
       </div>
       <br />
       <form [formGroup]="customerFormGroup" class="form">
@@ -38,6 +38,7 @@
             [(ngModel)]="user.email"
           />
         </mat-form-field>
+
         <mat-form-field class="mat-form">
           <mat-label>Dirección</mat-label>
           <input
@@ -52,7 +53,7 @@
           <input matInput formControlName="phone" [(ngModel)]="user.phone" />
         </mat-form-field>
         <mat-form-field class="mat-form">
-          <mat-label>Tipo de cliente</mat-label>
+          <mat-label>Tipo de usuario</mat-label>
           <mat-select
             formControlName="user_type"
             [(ngModel)]="user.user_type_id"
@@ -64,6 +65,14 @@
               {{ item.description }}
             </mat-option>
           </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mat-form" *ngIf="user.user_type_id == 3">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            [(ngModel)]="user.password"
+          />
         </mat-form-field>
         <mat-form-field class="mat-form">
           <mat-label>Factura electrónica</mat-label>

@@ -57,6 +57,7 @@ export class CreateCustomerComponent implements OnInit {
       name: [null, [Validators.required]],
       lastname: [null, [Validators.required]],
       email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
       phone: [null, [Validators.required]],
       address: [null, [Validators.required]],
       user_type: [null, [Validators.required]],
