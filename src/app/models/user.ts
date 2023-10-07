@@ -13,4 +13,5 @@ export class User {
   lat?: number = 0;
   lon?: number = 0;
   ticket: boolean = false;
+  password: string = '';
 }

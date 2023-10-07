@@ -4,7 +4,7 @@
     src="https://firebasestorage.googleapis.com/v0/b/delivery-udemy-mysql-759e1.appspot.com/o/logo_manantial.png?alt=media&token=6d176e3b-8091-4adf-b613-fa930c33d958"
   />
   <a mat-button [routerLink]="['/orders']">Pedidos</a>
-  <a mat-button [routerLink]="['/customers']">Cliente</a>
+  <a mat-button [routerLink]="['/customers']">Usuarios</a>
   <a mat-button [routerLink]="['/products']">Productos</a>
   <a mat-button [routerLink]="['/info']">Información</a>
   <a
@@ -14,7 +14,6 @@
     >Reportes</a
   >
   <div class="spacer"></div>
-  <!-- <a mat-raised-button (click)="logOut()">Cerrar Sesión</a> -->
   <button
     mat-icon-button
     [matMenuTriggerFor]="menu"
@@ -23,11 +22,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>person_add</mat-icon>
-      <span>Crear Administrador</span>
-    </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="updatePassword()">
       <mat-icon>autorenew</mat-icon>
       <span>Cambiar Contraseña</span>
     </button>

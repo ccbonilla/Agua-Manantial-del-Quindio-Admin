@@ -62,6 +62,7 @@ import { CustomerReviewComponent } from './views/customers/customer-review/custo
 import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
 import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/dialog-config-chart.component';
 import { HistoryComponent } from './views/orders/history/history.component';
+import { MapsComponent } from './views/maps/maps.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { HistoryComponent } from './views/orders/history/history.component';
     DetailOrderComponent,
     DialogConfigChartComponent,
     HistoryComponent,
+    MapsComponent,
   ],
   imports: [
     BrowserModule,

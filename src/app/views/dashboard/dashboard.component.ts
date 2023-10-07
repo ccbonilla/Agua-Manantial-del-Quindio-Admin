@@ -10,7 +10,7 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
-    private localStorageService: LocalstorageService<any>
+    private localStorageService: LocalstorageService
   ) {}
 
   ngOnInit(): void {}

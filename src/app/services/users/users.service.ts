@@ -4,13 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { map, tap, catchError } from 'rxjs/operators';
 import { User } from '../../models/user';
 import { Auth } from 'src/app/models/auth';
-import { ResponseModel } from 'src/app/models/response.model';
-import { HttpService } from '../http/http.service';
 import { userType } from 'src/app/models/user_type';
 @Injectable()
 export class UserService {
   private BASE_URL: string = 'http://localhost:3000/user';
   private BASE_URL_USER_TYPES: string = 'http://localhost:3000/user-type';
+  private BASE_URL_USER_AUTH: string = 'http://localhost:3000/user-auth';
   constructor(private http: HttpClient) {}
 
   get(url: string): Observable<User[]> {
@@ -56,5 +55,18 @@ export class UserService {
     return this.http
       .post(`${this.BASE_URL}/${url}`, user)
       .pipe(map((response) => response as User));
+  }
+  resetPassword(url: string) {
+    this.http.get(`${this.BASE_URL_USER_AUTH}/${url}`).subscribe((res) => {
+      console.log('res', res);
+    });
+  }
+
+  updatePassword(url: string, data: any) {
+    this.http
+      .put(`${this.BASE_URL_USER_AUTH}/${url}`, data)
+      .subscribe((res) => {
+        console.log('res', res);
+      });
   }
 }
