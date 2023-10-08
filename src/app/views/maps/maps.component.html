@@ -1,1 +1,19 @@
-<p>maps works!</p>
+<app-nav-bar></app-nav-bar>
+<div>
+  <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
+    <map-marker
+      *ngFor="let markerPosition of markerPositions"
+      [position]="markerPosition"
+      [options]="markerOptions"
+    ></map-marker>
+    <mat-list>
+      <div mat-subheader style="font-size: 40px; color: blue">
+        Pedidos para entregar:
+      </div>
+      <mat-list-item *ngFor="let item of coordenates">
+        <mat-icon matListItemIcon>place</mat-icon>
+        <div matListItemTitle>{{ item.address }}</div>
+      </mat-list-item>
+    </mat-list>
+  </google-map>
+</div>

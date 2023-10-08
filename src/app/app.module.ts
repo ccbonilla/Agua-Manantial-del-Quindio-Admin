@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,11 @@ import {
   GoogleMap,
   MapInfoWindow,
 } from '@angular/google-maps';
+import {
+  GooglePlaceDirective,
+  GooglePlaceModule,
+} from 'ngx-google-places-autocomplete';
+import { AgmCoreModule } from '@agm/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
@@ -122,6 +127,11 @@ import { MapsComponent } from './views/maps/maps.component';
     MatTabsModule,
     MatTooltipModule,
     MatMenuModule,
+    GooglePlaceModule,
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyAE245VEBLL9w2B44FgAz3q4QjMfEL8lpE',
+    //   libraries: ['places'],
+    // }),
   ],
   providers: [
     ProductService,
@@ -130,7 +140,11 @@ import { MapsComponent } from './views/maps/maps.component';
     BsModalService,
     InfoService,
     GoogleMap,
+    GooglePlaceModule,
+    GooglePlaceDirective,
+    MapInfoWindow,
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

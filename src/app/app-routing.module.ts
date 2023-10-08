@@ -11,6 +11,7 @@ import { CreateOrderComponent } from './views/orders/modal/create-order/create-o
 import { DetailOrderComponent } from './views/orders/detail-order/detail-order.component';
 import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
 import { HistoryComponent } from './views/orders/history/history.component';
+import { MapsComponent } from './views/maps/maps.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'createOrder/:customer_id', component: CreateOrderComponent },
   { path: 'reviewOrder/:order_id', component: DetailOrderComponent },
   { path: 'orderHistory/:customer_id', component: HistoryComponent },
+  { path: 'maps', component: MapsComponent },
 ];
 
 @NgModule({
