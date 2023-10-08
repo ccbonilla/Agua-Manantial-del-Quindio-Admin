@@ -58,10 +58,10 @@ export class DetailOrderComponent implements OnInit {
 
       this.order.customer.lat = this.autocompleteAddress
         ?.getPlace()
-        .geometry?.location?.lng();
+        .geometry?.location?.lat();
       this.order.customer.lon = this.autocompleteAddress
         ?.getPlace()
-        .geometry?.location?.lat();
+        .geometry?.location?.lng();
     });
   }
   createForm() {

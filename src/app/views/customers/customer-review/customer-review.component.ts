@@ -47,10 +47,10 @@ export class CustomerReviewComponent implements OnInit {
 
       this.user.lat = this.autocompleteAddress
         ?.getPlace()
-        .geometry?.location?.lng();
+        .geometry?.location?.lat();
       this.user.lon = this.autocompleteAddress
         ?.getPlace()
-        .geometry?.location?.lat();
+        .geometry?.location?.lng();
     });
   }
 
