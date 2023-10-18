@@ -5,6 +5,7 @@ export class User {
   email: string = '';
   phone: string = '';
   address: string = '';
+  address_detail: string = '';
   user_type_id: number = 0;
   user_type_name: string = '';
   previous_user_type_id: number = 0;

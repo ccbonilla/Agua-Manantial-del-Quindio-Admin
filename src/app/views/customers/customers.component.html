@@ -33,7 +33,7 @@
     <ng-container matColumnDef="Direccion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
       <td mat-cell *matCellDef="let row" (click)="openDialogOrderReview(row)">
-        {{ row.address }}
+        {{ row.address_detail }} {{ row.address }}
       </td>
     </ng-container>
     <ng-container matColumnDef="Compras">

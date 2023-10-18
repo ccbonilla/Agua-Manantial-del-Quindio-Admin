@@ -68,11 +68,12 @@ export class MapsComponent implements OnInit {
         this.userService
           .getUserById(`find-by-id/${user_id}`)
           .subscribe((user) => {
-            const { lat, lon, address } = user;
+            const { lat, lon, address, address_detail } = user;
             this.coordenates.push({
               lat,
               lng: lon,
               address,
+              address_detail,
             });
             this.markerPositions.push({
               lat,
