@@ -12,7 +12,7 @@
       </div>
       <mat-list-item *ngFor="let item of coordenates">
         <mat-icon matListItemIcon>place</mat-icon>
-        <div matListItemTitle>{{ item.address }}</div>
+        <div matListItemTitle>{{ item.address_detail }} {{ item.address }}</div>
       </mat-list-item>
     </mat-list>
   </google-map>

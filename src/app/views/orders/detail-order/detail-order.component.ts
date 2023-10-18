@@ -71,6 +71,7 @@ export class DetailOrderComponent implements OnInit {
       email: [null, [Validators.required]],
       phone: [null, [Validators.required]],
       address: [null, [Validators.required]],
+      address_detail: [null, [Validators.required]],
       user_type: [null, [Validators.required]],
       ticket: [null, [Validators.required]],
     });

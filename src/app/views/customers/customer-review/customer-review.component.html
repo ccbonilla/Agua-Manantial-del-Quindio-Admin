@@ -7,6 +7,7 @@
       <br />
       <form [formGroup]="customerFormGroup" class="form">
         <mat-form-field class="mat-form">
+          <mat-label>Nombres</mat-label>
           <input
             matInput
             placeholder="Nombre"
@@ -15,6 +16,7 @@
           />
         </mat-form-field>
         <mat-form-field class="mat-form">
+          <mat-label>Apellidos</mat-label>
           <input
             matInput
             placeholder="Apellidos"
@@ -23,6 +25,7 @@
           />
         </mat-form-field>
         <mat-form-field class="mat-form">
+          <mat-label>Correo</mat-label>
           <input
             matInput
             placeholder="Correo"
@@ -31,11 +34,20 @@
           />
         </mat-form-field>
         <mat-form-field class="mat-form">
+          <mat-label>Barrio</mat-label>
           <input
             matInput
             #inputFieldAddress
             formControlName="address"
             [(ngModel)]="user.address"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <mat-label>Nomenclatura</mat-label>
+          <input
+            matInput
+            formControlName="address_detail"
+            [(ngModel)]="user.address_detail"
           />
         </mat-form-field>
         <mat-form-field class="mat-form">

@@ -40,12 +40,20 @@
         </mat-form-field>
 
         <mat-form-field class="mat-form">
-          <mat-label>Dirección</mat-label>
+          <mat-label>Barrio</mat-label>
           <input
             matInput
             #inputFieldAddress
             formControlName="address"
             [(ngModel)]="user.address"
+          />
+        </mat-form-field>
+        <mat-form-field class="mat-form">
+          <mat-label>Nomenclatura</mat-label>
+          <input
+            matInput
+            formControlName="address_detail"
+            [(ngModel)]="user.address_detail"
           />
         </mat-form-field>
         <mat-form-field class="mat-form">

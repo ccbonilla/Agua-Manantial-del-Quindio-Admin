@@ -6,6 +6,16 @@
         <mat-expansion-panel-header>
           Seleccione el Cliente ⬇️ 
         </mat-expansion-panel-header>
+        <br />
+        <mat-form-field class="mat-form">
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Ingrese el dato a filtrar"
+            #input
+          />
+        </mat-form-field>
         <form [formGroup]="firstFormGroup">
           <div
             class="mat-elevation-z8"
@@ -48,7 +58,7 @@
                   (click)="selectCustomer(row)"
                   matStepperNext
                 >
-                  {{ row.address }}
+                  {{ row.address_detail }} {{ row.address }}
                 </td>
               </ng-container>
               <ng-container matColumnDef="phone">
@@ -143,7 +153,10 @@
       Cliente : {{ orderModel.customer.name }}
       {{ orderModel.customer.lastname }}
     </h5>
-    <h5>Dirección : {{ orderModel.customer.address }}</h5>
+    <h5>
+      Dirección : {{ orderModel.customer.address_detail }}
+      {{ orderModel.customer.address }}
+    </h5>
     <mat-table
       mat-table
       [dataSource]="dataSourceProductOrder"

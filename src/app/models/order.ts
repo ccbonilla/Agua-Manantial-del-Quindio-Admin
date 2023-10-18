@@ -15,6 +15,7 @@ export class Order {
     email: '',
     phone: '',
     address: '',
+    address_detail: '',
     user_type_id: 0,
     previous_user_type_id: 0,
     count: 0,
