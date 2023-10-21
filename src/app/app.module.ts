@@ -68,6 +68,8 @@ import { DetailOrderComponent } from './views/orders/detail-order/detail-order.c
 import { DialogConfigChartComponent } from './views/reports/dialog-conf-chart/dialog-config-chart.component';
 import { HistoryComponent } from './views/orders/history/history.component';
 import { MapsComponent } from './views/maps/maps.component';
+import { HomeClienteComponent } from './views/home-cliente/home-cliente.component';
+import { sectionService } from 'src/app/services/sectionService/section.service';
 
 @NgModule({
   declarations: [
@@ -92,6 +94,7 @@ import { MapsComponent } from './views/maps/maps.component';
     DialogConfigChartComponent,
     HistoryComponent,
     MapsComponent,
+    HomeClienteComponent,
   ],
   imports: [
     BrowserModule,
@@ -143,6 +146,7 @@ import { MapsComponent } from './views/maps/maps.component';
     GooglePlaceModule,
     GooglePlaceDirective,
     MapInfoWindow,
+    sectionService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
