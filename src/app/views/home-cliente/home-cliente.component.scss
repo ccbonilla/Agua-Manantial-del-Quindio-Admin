@@ -6,68 +6,12 @@
   padding-right: var(--tds-spacing-6);
 }
 
-.right {
-  float: right;
-  width: 33.33333%;
-}
-
-.left {
-  float: left;
-  width: 66.66667%;
-}
-
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
-  //max-width: 300px;
   margin: auto;
   text-align: center;
 }
-
-.target-Y {
-  position: relative;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 100%;
-  //max-width: 300px;
-  margin: auto;
-  text-align: center;
-  background-color: white; 
-  padding-bottom: 2px;
-}
-
-.target-X {
-  position: relative;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 100%;
-  //max-width: 300px;
-  margin: auto;
-  text-align: center;
-  background-color: white; 
-  padding-bottom: 2px;
-}
-
-.target-X::before {
-  content: "X"; /* El contenido del pseudo-elemento */
-  position: absolute; /* Coloca la "X" de forma absoluta dentro de la tarjeta */
-  top: 0; /* Ajusta la posición superior a 0 para que comience desde arriba */
-  left: 0; /* Ajusta la posición izquierda a 0 para que comience desde la izquierda */
-  width: 100%; /* Ancho del pseudo-elemento para cubrir toda la tarjeta */
-  height: 100%; /* Altura del pseudo-elemento para cubrir toda la tarjeta */
-  background-color: rgba(13,110,253,0.5);
-  color: white; /* Color del texto de la "X" */
-  font-size: 3rem; /* Tamaño de fuente de la "X" */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1; /* Asegura que la "X" esté por encima del contenido de la tarjeta */
-  opacity: 1; /* Inicialmente, la "X" está oculta */
-  transition: opacity 0.3s ease-in-out; /* Agrega una transición suave de opacidad */
-}
-
-.target-X:hover::before {
-  opacity: 1; /* Muestra la "X" cuando se pasa el ratón por encima de la tarjeta */
-}
-
 .title {
   color: grey;
   font-size: 18px;
@@ -104,13 +48,6 @@ button:hover, a:hover {
   box-shadow: 0 0 30px rgb(31 45 61 / 13%);
 }
 
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10vh; /* Ajusta esto según tus necesidades */
-}
-
 .btn {
   color: var(--bs-btn-hover-color);
   background-color: #0d6efd;
@@ -118,9 +55,18 @@ button:hover, a:hover {
   color: white;
   text-align: center;
   cursor: pointer;
-  width: 80%;
+  width: 60%;
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
+.cart-items {
+  display: none;
+}
+
+.cart-items.open {
+  display: block;
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -149,8 +95,6 @@ button:hover, a:hover {
 
 .rowPromoBox {
   margin: 0 -5px;
-  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  //background-color: #f1f1f1;
 }
 /* Clear floats after the columns */
 .row:after {
@@ -184,15 +128,6 @@ button:hover, a:hover {
   width: 50%;
 }
 
-ul {
-  list-style-position: inside; /* Coloca la viñeta dentro del área de texto */
-  padding-left: 0; /* Elimina el margen izquierdo predeterminado */
-}
-
-li {
-  margin-left: 0; /* Elimina cualquier margen izquierdo en los elementos de la lista */
-  padding-left: 20px; /* Agrega un espacio a la izquierda para la sangría de los elementos */
-}
 .button-container {
   display: flex;
   justify-content: space-between; /* Alinea los botones en los extremos */
@@ -212,33 +147,23 @@ table {
 .mat-form {
   width: 50%;
 }
+.mat-form-100 {
+  width: 100%;
+}
 .example-tab-icon {
   margin-right: 8px;
 }
 .mat-tab-label .mat-tab-label-content { 
-  font-size: 24px; /* Cambia el tamaño de fuente según tus necesidades */
-  font-family: 'Arial', sans-serif; /* Cambia el tipo de letra según tus necesidades */
-  /* Otros estilos personalizados, si es necesario */
+  font-size: 24px;
+  font-family: 'Arial', sans-serif;
 }
 .mat-tab-group {
   margin-bottom: 48px;
-}
-.example-tab-icon {
-  margin-right: 8px;
-}
-.pedidos-recientes {
-  color: blue; /* Cambia el color a azul */
-}
-.pedidos-en-ruta { 
-  color: orange; /* Cambia el color a verde */
 }
 .button {
     text-align: center;
     cursor: pointer;
     width: 80%;
-}
-.total-pedidos {
-  color: green; /* Cambia el color a verde */
 }
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
@@ -248,4 +173,184 @@ table {
     margin-bottom: 20px;
   }
 }
-  
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1400px){
+  .container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+    width: 100%;
+    //max-width: 1348px;
+  }
+}
+
+.div-block-principal {
+  position: fixed;
+  left: auto;
+  top: 235px;
+  right: 0%;
+  bottom: 0%;
+  z-index: 10;
+  width: 100px;
+  opacity: 1;
+}
+
+.grid-container {
+position: static;
+left: auto;
+top: auto;
+right: 0%;
+bottom: 43%;
+z-index: 10;
+width: 100px;
+padding-top: 20px;
+padding-bottom: 20px;
+padding-left: 30px;
+grid-row-gap: 9px;
+-ms-grid-columns: 0.75fr;
+grid-template-columns: 0.75fr;
+-ms-grid-rows: auto auto auto;
+grid-template-rows: auto auto auto;
+}
+.div-block-49 {
+padding: 10px;
+border-radius: 11px;
+background-color:#0d6efd;
+opacity: 0.36;
+}
+
+.socialmedia-icon {
+max-width: 100%;
+vertical-align: middle;
+display: inline-block;
+}
+
+.socialmedia-icon:hover {
+-ms-transform: scale(1.2);
+-webkit-transform: scale(1.2);
+transform: scale(1.2); 
+}
+
+.w-inline-block {
+max-width: 100%;
+display: inline-block;
+}
+
+.blank-section {
+--bg-overlay-color: transparent;
+--bg-gradient: none;
+height: 100%;
+width: 100%;
+//min-width: 980px;
+}
+
+.bgimg-4 {
+position: relative;
+//opacity: 0.65;
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+width: 100%;
+height: 800px; /* Ajusta la altura según tus necesidades */
+}
+.caption {
+position: absolute;
+left: 0;
+top: 50%;
+width: 100%;
+text-align: center;
+color: #000;
+}
+
+.caption span.border {
+background-color: #111;
+color: #fff;
+padding: 18px;
+font-size: 25px;
+letter-spacing: 10px;
+}
+.container-img {
+  max-width: 100%; /* La imagen no puede ser más ancha que su contenedor */
+  max-height: 100%; /* La imagen no puede ser más alta que su contenedor */
+  width: auto; /* Ajustar el ancho automáticamente */
+  height: auto; /* Ajustar la altura automáticamente */
+}
+
+.mat-form-2 {
+  //display: flex;
+  align-items: center;
+  width: 33.3333%;
+}
+.mat-form-3 {
+  //display: flex;
+  align-items: center;
+  width: 66.6666%;
+}
+.visible-checkbox {
+  margin-left: auto; /* Esto mueve el checkbox hacia la derecha */
+}
+.opacity-form {
+  justify-content: flex-start;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  margin: 0 10px;
+}
+
+.no-visible {
+  color: red; /* Cambia el color a azul */
+}
