@@ -6,4 +6,5 @@ export class Section {
     opacity: number = 0;
     posicion: number = 0;
     visible: boolean = true;
+    newSeccion: boolean = false;
   }

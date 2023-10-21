@@ -27,6 +27,7 @@ export class HomeClienteComponent {
   sectionList: Section [] = [];
   isPrevisualizarOpen = false;
   checked = false;
+  tabNuevo = false;
   estadoComponente: number = LOAD_COMPONENT.configSecciones;
 
   backgroundImages: string[] = [
@@ -174,21 +175,43 @@ export class HomeClienteComponent {
   onTabSelectionChange(selectedIndex: number) {
     this.selected.setValue(selectedIndex);
     this.seccionSelected = this.sectionList[selectedIndex];
-  
+
+    console.log('actual Selected Index : '+selectedIndex);
+    console.log('comparacion tab nuevo : '+ this.tabNuevo);
     // Actualiza el valor del formulario con los datos de la sección seleccionada
     //this.seccionFormGroup.setValue(this.seccionSelected);
+    if( !(this.tabNuevo)){
+      this.seccionFormGroup.patchValue({
+        titulo_seccion: this.seccionSelected.home_tittle,
+        descripcion: this.seccionSelected.description,
+        posicion: this.seccionSelected.posicion,
+        image: this.seccionSelected.image,
+        opacity: this.seccionSelected.opacity,
+        visible: this.seccionSelected.visible,
+      });
+    } else {
 
-    this.seccionFormGroup.patchValue({
-      titulo_seccion: this.seccionSelected.home_tittle,
-      descripcion: this.seccionSelected.description,
-      posicion: this.seccionSelected.posicion,
-      image: this.seccionSelected.image,
-      opacity: this.seccionSelected.opacity,
-      visible: this.seccionSelected.visible,
-    });
+      this.tabNuevo = false;
+    }
+    console.log('comparacion FIN tab nuevo : '+ this.tabNuevo);
+    
   }
 
   addTab() {
+    console.log('entro add tab : ');
+    this.seccionFormGroup.patchValue({
+      titulo_seccion: '',
+      descripcion: '',
+      posicion: '',
+      image: '',
+      opacity: '',
+      visible: '',
+    });
+    this.tabNuevo = true;
+    this.seccionSelected = new Section();
+    this.seccionSelected.image = 'https://picsum.photos/id/431/900/500';
+    this.seccionSelected.newSeccion = true;
+    this.sectionList.push(this.seccionSelected);
     this.tabs.push('New');
     this.selected.setValue(this.tabs.length - 1);
   }
