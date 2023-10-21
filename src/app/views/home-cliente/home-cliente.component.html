@@ -1,0 +1,83 @@
+<app-nav-bar></app-nav-bar>
+<!-- Modificacion secciones -->
+<div>
+  <h1 align="center">Home clientes</h1>
+</div>
+&nbsp;
+<div>
+  <div class="container">
+    <div class="main-body">
+      <div class="row gutters-sm">
+        <div class="col-md-12">
+            <mat-form-field>
+              <mat-label>Seleccionar tab por indice</mat-label>
+              <input matInput type="number" [formControl]="selected" />
+            </mat-form-field>
+
+            <div class="btn-container">
+              <button class="btn" (click)="addTab()">
+                Añadir nueva sección
+              </button>
+            </div>
+          &nbsp;
+          <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+            <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+                <ng-template mat-tab-label>
+                  <mat-icon>collections</mat-icon>
+                  &nbsp;
+                  <h5>Sección {{ tab }}</h5>
+                </ng-template>
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <form [formGroup]="seccionFormGroup">
+                        <mat-form-field class="mat-form">
+                          <mat-label>Fecha de entrega</mat-label>
+                          <input
+                            matInput
+                            [matDatepicker]="picker1"
+                            formControlName="order_date"
+                            [(ngModel)]="seccionSelected.section_id"
+                          />
+                          <mat-datepicker-toggle
+                            matIconSuffix
+                            [for]="picker1"
+                          ></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field class="mat-form">
+                          <mat-label>Valor del pedido</mat-label>
+                          <input
+                            matInput
+                            formControlName="value"
+                            type="number"
+                            [(ngModel)]="seccionSelected.section_id"
+                          />
+                        </mat-form-field>
+                        <mat-form-field class="mat-form">
+                          <mat-label>Descuento otorgado</mat-label>
+                          <input
+                            matInput
+                            type="number"
+                            placeholder="Descuento"
+                            formControlName="discount"
+                            [(ngModel)]="seccionSelected.section_id"
+                          />
+                        </mat-form-field>
+                    </form>
+
+                    <p class="text-secondary mb-1">Sin pedidos Recientes</p>
+                    <hr />
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <a mat-raised-button color="warn" [disabled]="tabs.length === 1" (click)="removeTab(index)">Borrar Sección</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

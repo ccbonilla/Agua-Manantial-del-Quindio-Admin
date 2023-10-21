@@ -1,0 +1,251 @@
+
+.container {
+  box-sizing: border-box;
+  top: -4rem;
+  padding-left: var(--tds-spacing-6);
+  padding-right: var(--tds-spacing-6);
+}
+
+.right {
+  float: right;
+  width: 33.33333%;
+}
+
+.left {
+  float: left;
+  width: 66.66667%;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  //max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.target-Y {
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  //max-width: 300px;
+  margin: auto;
+  text-align: center;
+  background-color: white; 
+  padding-bottom: 2px;
+}
+
+.target-X {
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  //max-width: 300px;
+  margin: auto;
+  text-align: center;
+  background-color: white; 
+  padding-bottom: 2px;
+}
+
+.target-X::before {
+  content: "X"; /* El contenido del pseudo-elemento */
+  position: absolute; /* Coloca la "X" de forma absoluta dentro de la tarjeta */
+  top: 0; /* Ajusta la posición superior a 0 para que comience desde arriba */
+  left: 0; /* Ajusta la posición izquierda a 0 para que comience desde la izquierda */
+  width: 100%; /* Ancho del pseudo-elemento para cubrir toda la tarjeta */
+  height: 100%; /* Altura del pseudo-elemento para cubrir toda la tarjeta */
+  background-color: rgba(13,110,253,0.5);
+  color: white; /* Color del texto de la "X" */
+  font-size: 3rem; /* Tamaño de fuente de la "X" */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Asegura que la "X" esté por encima del contenido de la tarjeta */
+  opacity: 1; /* Inicialmente, la "X" está oculta */
+  transition: opacity 0.3s ease-in-out; /* Agrega una transición suave de opacidad */
+}
+
+.target-X:hover::before {
+  opacity: 1; /* Muestra la "X" cuando se pasa el ratón por encima de la tarjeta */
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  //background: #0d6efd;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+.counter {
+  padding: 22px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgb(31 45 61 / 13%);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Ajusta esto según tus necesidades */
+}
+
+.btn {
+  color: var(--bs-btn-hover-color);
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  width: 80%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
+  z-index: 9999; /* Asegura que el overlay se muestre por encima de otros elementos */
+}
+
+.full-width {
+  flex: 0 0 100%;
+}
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 33.33333%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {
+  margin: 0 -5px
+  
+}
+
+.rowPromoBox {
+  margin: 0 -5px;
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  //background-color: #f1f1f1;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.cardButton {
+  padding: 16px;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.finalizar-button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #0d6efd;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+
+.mat-form {
+  width: 50%;
+}
+
+ul {
+  list-style-position: inside; /* Coloca la viñeta dentro del área de texto */
+  padding-left: 0; /* Elimina el margen izquierdo predeterminado */
+}
+
+li {
+  margin-left: 0; /* Elimina cualquier margen izquierdo en los elementos de la lista */
+  padding-left: 20px; /* Agrega un espacio a la izquierda para la sangría de los elementos */
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Alinea los botones en los extremos */
+  gap: 10px; /* Agrega espacio entre los botones */
+}
+
+* {
+  padding: 50;
+  margin: 100;
+}
+table {
+  width: 100%;
+}
+.mat-elevation-z8 {
+  background-color: blue;
+}
+.mat-form {
+  width: 50%;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+.mat-tab-label .mat-tab-label-content { 
+  font-size: 24px; /* Cambia el tamaño de fuente según tus necesidades */
+  font-family: 'Arial', sans-serif; /* Cambia el tipo de letra según tus necesidades */
+  /* Otros estilos personalizados, si es necesario */
+}
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+.pedidos-recientes {
+  color: blue; /* Cambia el color a azul */
+}
+.pedidos-en-ruta { 
+  color: orange; /* Cambia el color a verde */
+}
+.button {
+    text-align: center;
+    cursor: pointer;
+    width: 80%;
+}
+.total-pedidos {
+  color: green; /* Cambia el color a verde */
+}
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+  

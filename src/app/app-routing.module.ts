@@ -12,6 +12,7 @@ import { DetailOrderComponent } from './views/orders/detail-order/detail-order.c
 import { CreateCustomerComponent } from './views/customers/create-customer/create-customer.component';
 import { HistoryComponent } from './views/orders/history/history.component';
 import { MapsComponent } from './views/maps/maps.component';
+import { HomeClienteComponent } from './views/home-cliente/home-cliente.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'reviewOrder/:order_id', component: DetailOrderComponent },
   { path: 'orderHistory/:customer_id', component: HistoryComponent },
   { path: 'maps', component: MapsComponent },
+  { path: 'homecliente', component: HomeClienteComponent },
 ];
 
 @NgModule({
