@@ -59,7 +59,17 @@ button:hover, a:hover {
   margin-right: 30px;
   margin-left: 30px;
 }
-
+.btn2 {
+  color: var(--bs-btn-hover-color);
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  width: 80%;
+  margin-right: 30px;
+  margin-left: 30px;
+}
 .cart-items {
   display: none;
 }
@@ -232,40 +242,36 @@ body {
     //max-width: 1348px;
   }
 }
-
 .div-block-principal {
   position: fixed;
-  left: auto;
-  top: 235px;
-  right: 0%;
-  bottom: 0%;
+  right: 0;
+  //bottom: 0;
   z-index: 10;
-  width: 100px;
-  opacity: 1;
 }
 
 .grid-container {
-position: static;
-left: auto;
-top: auto;
-right: 0%;
-bottom: 43%;
-z-index: 10;
-width: 100px;
-padding-top: 20px;
-padding-bottom: 20px;
-padding-left: 30px;
-grid-row-gap: 9px;
--ms-grid-columns: 0.75fr;
-grid-template-columns: 0.75fr;
--ms-grid-rows: auto auto auto;
-grid-template-rows: auto auto auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinea los elementos a la derecha */
+  padding: 20px;
 }
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinea el texto a la derecha */
+  margin-bottom: 10px; /* Agrega espacio entre el texto y el botón */
+}
+
+.text {
+  font-size: 18px; /* Ajusta el tamaño del texto según tus preferencias */
+}
+
 .div-block-49 {
-padding: 10px;
-border-radius: 11px;
-background-color:#0d6efd;
-opacity: 0.36;
+  padding: 10px;
+  border-radius: 11px;
+  background-color: #0d6efd;
+  opacity: 0.7;
 }
 
 .socialmedia-icon {

@@ -1,5 +1,5 @@
 export class Section {
-    section_id: string = '';
+    section_id: number = 0;
     home_tittle: string = '';
     description: string = '';
     image: string = '';

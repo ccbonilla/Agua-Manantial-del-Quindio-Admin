@@ -20,4 +20,14 @@ export class sectionService {
       .put(`${this.BASE_URL}/${url}`, data)
       .pipe(map((response) => response));
   }
+  create(url: string, data: Section): Observable<any> {
+    return this.http
+      .post(`${this.BASE_URL}/${url}`, data)
+      .pipe(map((response) => response));
+  }
+  del(url: string): Observable<any> {
+    return this.http
+      .delete(`${this.BASE_URL}/${url}`)
+      .pipe(map((response) => response));
+  }
 }

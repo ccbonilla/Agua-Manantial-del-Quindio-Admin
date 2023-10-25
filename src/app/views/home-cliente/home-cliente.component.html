@@ -50,7 +50,8 @@
                       <div class="btn-container">
                         <mat-form-field class="mat-form-2 opacity-form">
                           <mat-label>Opacamiento de la imagen</mat-label>
-                          <input matInput formControlName="opacity" type="number" />
+                          <input matInput formControlName="opacity" type="number" min="0" max="100"/>
+                          <mat-hint align="start">Introduce un valor de opacidad entre 0 y 100.</mat-hint>
                         </mat-form-field>
                         <mat-form-field class="mat-form-2">
                           <mat-label>Posición de la sección</mat-label>
@@ -111,12 +112,13 @@
       <div class="div-block-principal">
         <div class="w-layout-grid grid-container">
           <div class="div-block-49">
-            <button class="btn" (click)="salirprevisualizarHome()">
+            <button class="btn2" (click)="salirprevisualizarHome()">
               Salir Previsualizar home
             </button>
           </div>
         </div>
       </div>
+      
       <div *ngFor="let section of sectionList; let i = index" >
         <ng-container *ngIf="section.visible; else hiddenSection">
           <div style="color: #777; background-color: white; text-align: center; padding: 50px 80px; text-align: justify;">
@@ -131,13 +133,13 @@
         </ng-container>
         <ng-template #hiddenSection>
           <div style="color: #777; background-color: white; text-align: center; padding: 50px 80px; text-align: justify;">
-            <h3 style="text-align: center;"><p class="no-visible"> (Sección aún No Visible)</p> {{ section.home_tittle }} </h3>
+            <h3 style="text-align: center;"><p class="no-visible"> (Sección no visible)</p> {{ section.home_tittle }} </h3>
             <p>{{ section.description }}</p>
           </div>
         
           <div class="bgimg-4" [style.opacity]="section.opacity" [style.backgroundImage]="backgroundImages[i]">
             <div class="caption">
-              <p class="no-visible"> (Sección aún No Visible)</p>
+              <p class="no-visible"> (Sección no visible)</p>
             </div>
           </div>
         </ng-template>
