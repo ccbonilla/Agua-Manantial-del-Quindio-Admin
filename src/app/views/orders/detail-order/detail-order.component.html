@@ -191,6 +191,9 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close (click)="createTicket()">
+    Generar factura
+  </button>
   <button
     mat-button
     [mat-dialog-close]="true"

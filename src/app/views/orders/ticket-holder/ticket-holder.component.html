@@ -1,0 +1,51 @@
+<mat-card class="card">
+  <div class="logo-container">
+    <img
+    class="logo"
+    src="https://firebasestorage.googleapis.com/v0/b/delivery-udemy-mysql-759e1.appspot.com/o/logo_manantial.png?alt=media&token=6d176e3b-8091-4adf-b613-fa930c33d958"
+  />
+  </div>
+
+  <mat-card-header class="header">
+
+    <mat-card-title>Facturero Agua Manantial</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>La última factura registrada hasta el momento es :</p>
+    <p><b>{{ last_ticket }}</b></p>
+    <form [formGroup]="formGroup">
+      <mat-form-field class="mat-form">
+        <mat-label>Prefijo</mat-label>
+        <input
+          matInput
+          formControlName="prefix"
+          [(ngModel)]="ticket_holder.prefix"
+        />
+      </mat-form-field>
+      <mat-form-field class="mat-form">
+        <mat-label>Primera factura autorizada</mat-label>
+        <input
+          matInput
+          formControlName="first_ticket"
+          [(ngModel)]="ticket_holder.min_number"
+        />
+      </mat-form-field>
+      <mat-form-field class="mat-form">
+        <mat-label>Última factura autorizada</mat-label>
+        <input
+          matInput
+          formControlName="last_ticket"
+          [(ngModel)]="ticket_holder.max_number"
+        />
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="updateTicketHolder()">Cambiar</button>
+    <button mat-button (click)="close()">Volver</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

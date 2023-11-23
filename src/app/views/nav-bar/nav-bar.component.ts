@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { UserService } from 'src/app/services/users/users.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TicketHolderComponent } from '../orders/ticket-holder/ticket-holder.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +16,8 @@ export class NavBarComponent implements OnInit {
   constructor(
     private router: Router,
     private localStorageService: LocalstorageService,
-    public userService: UserService
+    public userService: UserService,
+    private dialog : MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -42,5 +45,9 @@ export class NavBarComponent implements OnInit {
         });
       }
     });
+  }
+
+  openDialog(){
+    this.dialog.open(TicketHolderComponent)
   }
 }

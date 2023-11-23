@@ -1,0 +1,92 @@
+<div  #htmlTicket>
+  <div class="logo-container">
+    <img  class="image"  src="/assets/logo_manantial.png" alt="Logo de la empresa">
+    <!-- <img  class="image"  src="https://firebasestorage.googleapis.com/v0/b/delivery-udemy-mysql-759e1.appspot.com/o/logo_manantial.png?alt=media&token=6d176e3b-8091-4adf-b613-fa930c33d958&_gl=1*45w7gf*_ga*MjE0MjU3NTEzNi4xNjk4NzM0MDQ5*_ga_CW55HF8NVT*MTY5ODczNDA0OS4xLjEuMTY5ODczNDE0NC4zOC4wLjA." alt="Logo de la empresa"> -->
+    <h3>FACTURA DE VENTA</h3>
+    <h5>{{ticket}}</h5>
+    <p>Juan Gabriel Velásquez Blanco</p>
+    <p>NIT: 9773008-8</p>
+    <p>Teléfonos: 321 488 6225  - 323 494 5856</p>
+    <p class="disclaimer">Res. DIAN Formulario No. 18764024966723 Fecha 2022/02/04</p>
+    <p class="disclaimer">Autoriza numeración del pref. 8 No. 5.001 al 9.999 Vigencia 6 meses</p>
+  </div>
+  <div class="info-customer">
+    <div class="divider"></div>
+    <h5>Cliente :</h5>
+    <p>Nombre : {{order.customer.name}} {{order.customer.lastname}}</p>
+    <p>Dirección: {{order.customer.address_detail}} {{order.customer.address.split(',')[0]}}</p>
+    <p>Teléfono: {{order.customer.phone}}</p>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="ref">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Id del producto
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+        >
+          {{ row.product_order_id }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Descripción
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+        >
+          {{ row.product_name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="valor_unitario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Valor unitario
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+        >
+          {{ row.value }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Cantidad
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+        >
+          {{ row.product_cant }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="valor_total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Valor total
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+        >
+          {{ row.value * row.product_cant }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="titles"></tr>
+      <tr mat-row *matRowDef="let row; columns: titles"></tr>
+    </table>
+  </div>
+  <div class="footer">
+    <div class="divider"></div>
+    <h3>Valor total factura : {{subtotal}}</h3>
+    <h3>Descuento : {{order.discount}}</h3>
+    <h3>Valor a pagar : {{order.value}} </h3>
+  </div>
+</div>
+<div class="button-section">
+  <div class="divider"></div>
+  <button (click)="sendTicket()">Crear factura</button>
+  <button (click)="close()">Cancelar</button>
+</div>

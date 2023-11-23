@@ -34,7 +34,7 @@ export class HomeClienteComponent {
   backgroundImages: string[] = [
   ];
 
-  
+
   get loadingComponent() {
     return this.estadoComponente === LOAD_COMPONENT.load;
   }
@@ -44,7 +44,7 @@ export class HomeClienteComponent {
   get viewHomeClientes() {
     return this.estadoComponente === LOAD_COMPONENT.previsualizacionHome;
   }
-  
+
   constructor(private sectionService: sectionService, private formBuilder: FormBuilder) {
     this.seccionFormGroup = this.formBuilder.group({
       titulo_seccion: [null],
@@ -58,20 +58,17 @@ export class HomeClienteComponent {
 
   getInfoSecciones() {
     this.sectionService.get('list').subscribe((res) => {
-      console.log('get sections '+JSON.stringify(res));
       this.sectionList = res;
       this.sectionList.sort((a, b) => a.posicion - b.posicion);
       this.seccionSelected = this.sectionList[0];
-      this.tabs = []; 
+      this.tabs = [];
       this.sectionList.forEach((section: Section) => {
-        console.log('IMAGE TO ADD '+section.image);
         this.backgroundImages.push('url('+section.image+')');
         this.tabs.push(''+section.posicion);
         this.nextSeccion = section.posicion + 1;
       });
-      console.log('fianl background image '+JSON.stringify(this.backgroundImages));
-      console.log('get sections 1 '+JSON.stringify(this.seccionSelected) );
-      
+
+
       this.createForm();
     });
   }
@@ -96,20 +93,17 @@ export class HomeClienteComponent {
   selected = new FormControl(0);
 
   cargarImagen(): void {
-    console.log('URL en cargar IMAGEN : '+this.seccionFormGroup.controls['image'].value);
     this.seccionSelected.image = this.seccionFormGroup.controls['image'].value;
   }
 
   reloadListaSecciones(cargar: Boolean, reloadTab: Boolean): void {
-    console.log('on reload lista secciones after save '+this.selected.value);
     this.sectionService.get('list').subscribe((res) => {
       this.sectionList = res;
       this.sectionList.sort((a, b) => a.posicion - b.posicion);
       this.seccionSelected = res[this.selected.value ?? 0];
-      this.tabs = []; 
+      this.tabs = [];
       this.backgroundImages = [];
       this.sectionList.forEach((section: Section) => {
-        console.log('IMAGE TO ADD '+section.image);
         this.backgroundImages.push('url('+section.image+')');
         this.tabs.push(''+section.posicion);
         //if(section.posicion == this.selected.value && cargar){
@@ -126,14 +120,12 @@ export class HomeClienteComponent {
   }
   salirprevisualizarHome(): void {
     this.estadoComponente = LOAD_COMPONENT.configSecciones;
-    console.log('entro previsualizar : '+this.isPrevisualizarOpen);
     this.isPrevisualizarOpen = !this.isPrevisualizarOpen;
   }
 
   previsualizarHome(): void {
     this.reloadListaSecciones(false, false);
     this.estadoComponente = LOAD_COMPONENT.previsualizacionHome;
-    console.log('entro previsualizar : '+this.isPrevisualizarOpen);
     this.isPrevisualizarOpen = !this.isPrevisualizarOpen;
   }
 
@@ -149,11 +141,9 @@ export class HomeClienteComponent {
 
     if(seccionUpdate.newSeccion == true){
       //crear seccion
-      console.log('ENTRO CREAR SECCION : '+seccionUpdate.newSeccion);
-      console.log('SEc crear JSON : '+JSON.stringify(seccionUpdate));
+
       seccionUpdate.newSeccion = false;
       this.sectionService.create(`create`, seccionUpdate).subscribe((res) => {
-        console.log('RESULT CREAR section '+JSON.stringify(res));
         this.mensajeUsuario('Sección creada correctamente');
         if (this.selected.value == 0) {
           window.location.reload();
@@ -163,31 +153,25 @@ export class HomeClienteComponent {
       });
     } else {
       //update seccion
-      console.log('ENTRO UPDATE SECCION : '+seccionUpdate.newSeccion);
-      console.log('id de la seccion update : '+this.seccionSelected.section_id);
-      
-      
-      console.log('SEc update : '+JSON.stringify(seccionUpdate));
+
 
       this.sectionService.put(`update/${this.seccionSelected.section_id}`, seccionUpdate).subscribe((res) => {
-        console.log('RESULT UPDAte section '+JSON.stringify(res));
         this.mensajeUsuario('Sección actualizada correctamente');
         this.reloadListaSecciones(true, false);
       });
     }
-    
+
   }
   onTabSelectionChange(selectedIndex: number) {
     this.selected.setValue(selectedIndex);
     this.seccionSelected = this.sectionList[selectedIndex];
 
-    console.log('actual Selected Index : '+selectedIndex);
-    console.log('comparacion tab nuevo : '+ this.tabNuevo);
+
     // Actualiza el valor del formulario con los datos de la sección seleccionada
     //this.seccionFormGroup.setValue(this.seccionSelected);
     if( this.tabNuevo){
       this.tabNuevo = false;
-      
+
     } else {
       this.seccionFormGroup.patchValue({
         titulo_seccion: this.seccionSelected.home_tittle,
@@ -198,12 +182,10 @@ export class HomeClienteComponent {
         visible: this.seccionSelected.visible,
       });
     }
-    console.log('comparacion FIN tab nuevo : '+ this.tabNuevo);
-    
+
   }
 
   addTab() {
-    console.log('entro add tab : ');
     this.seccionFormGroup.patchValue({
       titulo_seccion: '',
       descripcion: '',
@@ -222,18 +204,16 @@ export class HomeClienteComponent {
     this.selected.setValue(this.tabs.length - 1);
   }
   removeTab(index: number) {
-    console.log('entro eliminar tab : '+this.selected.value);
     if (this.selected.value === index && index != 0) {
       this.selected.setValue(index - 1);
     }
-    
+
     // Elimina el tab del arreglo
     this.tabs.splice(index, 1);
     this.sectionList.splice(index, 1);
     if(this.seccionSelected.section_id != null){
 
       this.sectionService.del(`delete/${this.seccionSelected.section_id}`).subscribe((res) => {
-        console.log('RESULT DELETE section '+JSON.stringify(res));
         this.mensajeUsuario('Sección borrada correctamente');
         if (index == 0) {
           window.location.reload();
@@ -243,8 +223,8 @@ export class HomeClienteComponent {
 
     }
   }
-  
-  
+
+
   mensajeUsuario(msg: String) {
     const Toast = Swal.mixin({
       toast: true,
