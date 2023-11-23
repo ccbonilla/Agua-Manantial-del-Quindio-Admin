@@ -13,6 +13,7 @@ import { CreateCustomerComponent } from './views/customers/create-customer/creat
 import { HistoryComponent } from './views/orders/history/history.component';
 import { MapsComponent } from './views/maps/maps.component';
 import { HomeClienteComponent } from './views/home-cliente/home-cliente.component';
+import { TicketHolderComponent } from './views/orders/ticket-holder/ticket-holder.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'orderHistory/:customer_id', component: HistoryComponent },
   { path: 'maps', component: MapsComponent },
   { path: 'homecliente', component: HomeClienteComponent },
+  { path: 'ticket-holder', component: TicketHolderComponent },
 ];
 
 @NgModule({

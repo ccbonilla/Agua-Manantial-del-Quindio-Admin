@@ -38,7 +38,6 @@ import {
   GooglePlaceDirective,
   GooglePlaceModule,
 } from 'ngx-google-places-autocomplete';
-import { AgmCoreModule } from '@agm/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
@@ -56,6 +55,7 @@ import { InfoComponent } from './views/info/info.component';
 import { ProductService } from './services/products/product.service';
 import { OrderService } from './services/orders/orders.service';
 import { UserService } from './services/users/users.service';
+import { TicketService } from './services/tickets/ticket.service';
 import { OrderReviewComponent } from './views/orders/modal/order-review/order-review.component';
 import { ProductReviewComponent } from './views/products/product-review/product-review.component';
 import { InfoService } from './services/infoService/info.service';
@@ -70,6 +70,8 @@ import { HistoryComponent } from './views/orders/history/history.component';
 import { MapsComponent } from './views/maps/maps.component';
 import { HomeClienteComponent } from './views/home-cliente/home-cliente.component';
 import { sectionService } from 'src/app/services/sectionService/section.service';
+import { TicketComponent } from './views/orders/ticket/ticket.component';
+import { TicketHolderComponent } from './views/orders/ticket-holder/ticket-holder.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { sectionService } from 'src/app/services/sectionService/section.service'
     HistoryComponent,
     MapsComponent,
     HomeClienteComponent,
+    TicketComponent,
+    TicketHolderComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,13 +144,14 @@ import { sectionService } from 'src/app/services/sectionService/section.service'
     ProductService,
     OrderService,
     UserService,
+    TicketService,
     BsModalService,
     InfoService,
     GoogleMap,
     GooglePlaceModule,
     GooglePlaceDirective,
     MapInfoWindow,
-    sectionService
+    sectionService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

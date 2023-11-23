@@ -108,6 +108,8 @@ export class OrdersComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.ordersGroup);
   }
   openDialogOrderReview(order: Order) {
+    console.log('entra');
+
     const dialogRef = this.dialog.open(DetailOrderComponent, {
       data: order,
       height: '500px',
